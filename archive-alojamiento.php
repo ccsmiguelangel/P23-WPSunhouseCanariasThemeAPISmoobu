@@ -63,29 +63,7 @@ get_header(); ?>
 				<div class="elementor-widget-wrap elementor-element-populated">
 					<div class="elementor-element elementor-element-e0a8321 elementor-widget elementor-widget-image" data-id="e0a8321" data-element_type="widget" data-widget_type="image.default">
 						<div class="elementor-widget-container">
-							<style>
-								/*! elementor - v3.7.3 - 29-08-2022 */
-								.elementor-widget-image {
-									text-align: center
-								}
-
-								.elementor-widget-image a {
-									display: inline-block
-								}
-
-								.elementor-widget-image a img[src$=".svg"] {
-									width: 48px
-								}
-
-								.elementor-widget-image img {
-									vertical-align: middle;
-									display: inline-block
-								}
-							</style>
-							<figure class="wp-caption">
-								<img width="588" height="639" src="http://localhost/.Business/003SunhouseCanarias/wp-content/uploads/2022/07/selector-reserva.png" class="attachment-large size-large" alt="" loading="lazy" srcset="http://localhost/.Business/003SunhouseCanarias/wp-content/uploads/2022/07/selector-reserva.png 588w, http://localhost/.Business/003SunhouseCanarias/wp-content/uploads/2022/07/selector-reserva-276x300.png 276w" sizes="(max-width: 588px) 100vw, 588px">
-								<figcaption class="widget-image-caption wp-caption-text">Selector temporalmente deshabilitado</figcaption>
-							</figure>
+						<?php echo do_shortcode('[form-picker]'); ?>
 						</div>
 					</div>
 				</div>

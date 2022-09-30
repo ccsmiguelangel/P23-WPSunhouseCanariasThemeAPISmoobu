@@ -5,6 +5,9 @@
 
 @require_once plugin_dir_path(__FILE__).'public/archive.php';
 
+
+@require_once plugin_dir_path(__FILE__).'public/form-picker.php';
+
 // https://wordpress.stackexchange.com/questions/6731/how-do-test-if-a-post-is-a-custom-post-type
 // https://developer.wordpress.org/reference/functions/is_singular/
 // https://stackoverflow.com/questions/45734613/how-to-display-custom-meta-box-value-in-single-post-in-wordpress
