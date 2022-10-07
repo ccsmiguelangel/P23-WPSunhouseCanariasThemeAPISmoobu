@@ -40,7 +40,7 @@ function alojamiento_setup() {
 		'show_in_menu' => true,
     'query_var' => true, // Add reference values
     'rewrite' => array( 
-			'slug' => 'alojamiento',
+			'slug' => 'alojamientos',
 			'with_front' => true // notice here
 		 ), // site url
     'capability_type' => 'alojamiento', // Display Permissions (Editor)

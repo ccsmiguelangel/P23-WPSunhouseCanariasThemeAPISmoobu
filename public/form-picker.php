@@ -1875,7 +1875,6 @@ function p23_form_picker()
     }
 
     .nd_booking_search_component_l2 form input[type="submit"] {
-      letter-spacing: 4px;
       font-size: 11px;
       line-height: 11px;
       border-radius: 2px;
@@ -2535,28 +2534,28 @@ function p23_form_picker()
   <div class="wpb_wrapper">
     <div class="nd_booking_search_component_l2 nd_booking_border_1_solid_grey nd_booking_section search-l2-home1">
       <!--start header-->
-      <div style="background-color: #e34f1e" class="nd_booking_section nd_booking_text_align_center nd_booking_padding_30 nd_booking_box_sizing_border_box">
+      <div style="background-color: #e34f1e" class="nd_booking_section nd_booking_text_align_center nd_booking_padding_20 nd_booking_box_sizing_border_box">
         <h2 class="nd_options_color_white" style="color: #fff; margin-bottom: 0;">Buscar Habitaciones</h2>
-        <div class="nd_booking_section nd_booking_height_10"></div>
-        <p class="nd_options_color_white nd_booking_font_size_12 nd_booking_letter_spacing_2">
+         
+        <p class="nd_options_color_white nd_booking_font_size_12 nd_booking_letter_spacing_2" style="margin-bottom: 0px;">
           INICIAR RESERVA
         </p>
       </div>
       <!--end header-->
 
       <!--START FORM-->
-      <form style="padding-top: 35px" class="nd_booking_padding_30 nd_booking_box_sizing_border_box nd_booking_section nd_booking_bg_white" action="<?php echo get_post_type_archive_link('alojamiento'); ?>" method="get">
+      <form style="padding-top: 35px" class="nd_booking_padding_20 nd_booking_box_sizing_border_box nd_booking_section nd_booking_bg_white" action="<?php echo get_post_type_archive_link('alojamiento'); ?>" method="get">
         <div class="nd_booking_width_100_percentage nd_booking_width_100_percentage_all_iphone nd_booking_float_left nd_booking_box_sizing_border_box">
           <!--check in/out-->
           <div class="nd_booking_width_50_percentage nd_booking_width_100_percentage_all_iphone nd_booking_float_left nd_booking_box_sizing_border_box">
             <div id="nd_booking_open_calendar_from" class="nd_booking_section nd_booking_box_sizing_border_box nd_booking_text_align_center nd_booking_cursor_pointer">
               <div class="nd_booking_section nd_booking_box_sizing_border_box nd_booking_text_align_center">
-                <h5 class="nd_options_color_grey nd_options_second_font nd_booking_letter_spacing_2 nd_booking_font_size_12">
+                <h5 class="nd_options_color_grey nd_options_second_font  nd_booking_font_size_12">
                   ENTRADA
                 </h5>
-                <div class="nd_booking_section nd_booking_height_15"></div>
+                
                 <div class="nd_booking_section nd_booking_height_1 nd_options_border_bottom_1_solid_grey"></div>
-                <div class="nd_booking_section nd_booking_height_30"></div>
+                
                 <div class="nd_booking_display_inline_flex">
                   <div class="nd_booking_float_left nd_booking_text_align_right">
                     <h1 id="nd_booking_date_number_from_front" class="nd_booking_font_size_50 nd_options_color_greydark">
@@ -2565,11 +2564,11 @@ function p23_form_picker()
                   <div class="nd_booking_float_right nd_booking_text_align_center nd_booking_margin_left_10">
                     <h6 id="nd_booking_date_month_from_front" class="nd_options_color_grey nd_booking_margin_top_7 nd_booking_font_size_12">
                     </h6>
-                    <div class="nd_booking_section nd_booking_height_5"></div>
-                    <img alt="" width="12" src="http://www.nicdarkthemes.com/themes/resort/wp/demo/apartment/wp-content/plugins/nd-booking/assets/img/icons/icon-down-arrow-grey.svg" />
+                    
+                    <img alt="" width="12" src="<?php echo get_stylesheet_directory_uri().'/public/icons/icon-down-arrow-grey.svg';?>" />
                   </div>
                 </div>
-                <div class="nd_booking_section nd_booking_height_30"></div>
+                
                 <div class="nd_booking_section nd_booking_height_1 nd_options_border_bottom_1_solid_grey nd_booking_display_none_all_iphone"></div>
                 <div class="nd_booking_section nd_booking_height_30 nd_booking_display_none_all_iphone"></div>
               </div>
@@ -2582,12 +2581,12 @@ function p23_form_picker()
           <div class="nd_booking_width_50_percentage nd_booking_width_100_percentage_all_iphone nd_booking_float_left nd_booking_box_sizing_border_box">
             <div id="nd_booking_open_calendar_to" class="nd_booking_section nd_booking_box_sizing_border_box nd_booking_text_align_center nd_booking_cursor_pointer">
               <div class="nd_booking_section nd_booking_box_sizing_border_box nd_booking_text_align_center">
-                <h5 class="nd_options_color_grey nd_options_second_font nd_booking_letter_spacing_2 nd_booking_font_size_12">
+                <h5 class="nd_options_color_grey nd_options_second_font  nd_booking_font_size_12">
                   SALIDA
                 </h5>
-                <div class="nd_booking_section nd_booking_height_15"></div>
+                
                 <div class="nd_booking_section nd_booking_height_1 nd_options_border_bottom_1_solid_grey"></div>
-                <div class="nd_booking_section nd_booking_height_30"></div>
+                
                 <div class="nd_booking_display_inline_flex">
                   <div class="nd_booking_float_left nd_booking_text_align_right">
                     <h1 id="nd_booking_date_number_to_front" class="nd_booking_font_size_50 nd_options_color_greydark">
@@ -2596,13 +2595,13 @@ function p23_form_picker()
                   <div class="nd_booking_float_right nd_booking_text_align_center nd_booking_margin_left_10">
                     <h6 id="nd_booking_date_month_to_front" class="nd_options_color_grey nd_booking_margin_top_7 nd_booking_font_size_12">
                     </h6>
-                    <div class="nd_booking_section nd_booking_height_5"></div>
-                    <img alt="" width="12" src="http://www.nicdarkthemes.com/themes/resort/wp/demo/apartment/wp-content/plugins/nd-booking/assets/img/icons/icon-down-arrow-grey.svg" />
+                    
+                    <img alt="" width="12" src="<?php echo get_stylesheet_directory_uri().'/public/icons/icon-down-arrow-grey.svg';?>" />
                   </div>
                 </div>
-                <div class="nd_booking_section nd_booking_height_30"></div>
+                
                 <div class="nd_booking_section nd_booking_height_1 nd_options_border_bottom_1_solid_grey"></div>
-                <div class="nd_booking_section nd_booking_height_30"></div>
+                
               </div>
             </div>
 
@@ -2616,18 +2615,18 @@ function p23_form_picker()
             let date = new Date();
             let today = date.getDate();
             let mounthNames = [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December",
+              "Enero",
+              "Febrero",
+              "Marzo",
+              "Abril",
+              "Mayo",
+              "Junio",
+              "Julio",
+              "Agosto",
+              "Septiembre",
+              "Octubre",
+              "Noviembre",
+              "Diciembre",
             ];
             let mounthNamesShort = [
               "Ene",
@@ -2637,11 +2636,11 @@ function p23_form_picker()
               "May",
               "Jun",
               "Jul",
-              "Aug",
+              "Ago",
               "Sep",
               "Oct",
               "Nov",
-              "Dec",
+              "Dic",
             ];
             let currentMonthNameShort = mounthNamesShort[date.getMonth()];
             let nextMonthNameShort = mounthNamesShort[date.getMonth()+1];
@@ -2821,12 +2820,12 @@ function p23_form_picker()
             <div class="nd_booking_section nd_booking_box_sizing_border_box nd_booking_text_align_center">
               <div class="nd_booking_section nd_booking_box_sizing_border_box nd_booking_text_align_center">
                 <div class="nd_booking_section nd_booking_position_relative">
-                  <img class="nd_booking_position_absolute nd_booking_left_0 nd_booking_top_0 nd_booking_guests_decrease nd_booking_cursor_pointer" alt="" width="20" src="http://www.nicdarkthemes.com/themes/resort/wp/demo/apartment/wp-content/plugins/nd-booking/assets/img/icons/icon-decrease-grey.svg" />
+                  <img class="nd_booking_position_absolute nd_booking_left_0 nd_booking_top_0 nd_booking_guests_decrease nd_booking_cursor_pointer" alt="" width="20" src="<?php echo get_stylesheet_directory_uri().'/public/icons/icon-decrease-grey.svg';?>" />
                   <h3 class="nd_booking_color_greydark">
                     <span class="nd_booking_guests_number">1</span>
                     <span class="nd_booking_guests_number_word">Huésped</span>
                   </h3>
-                  <img class="nd_booking_position_absolute nd_booking_right_0 nd_booking_top_0 nd_booking_guests_increase nd_booking_cursor_pointer" alt="" width="20" src="http://www.nicdarkthemes.com/themes/resort/wp/demo/apartment/wp-content/plugins/nd-booking/assets/img/icons/icon-increase-grey.svg" />
+                  <img class="nd_booking_position_absolute nd_booking_right_0 nd_booking_top_0 nd_booking_guests_increase nd_booking_cursor_pointer" alt="" width="20" src="<?php echo get_stylesheet_directory_uri().'/public/icons/icon-increase-grey.svg';  ?>" />
                 </div>
               </div>
             </div>
@@ -2868,10 +2867,10 @@ function p23_form_picker()
           <!--guests-->
         </div>
 
-        <div class="nd_booking_section nd_booking_height_30"></div>
+        
 
         <div class="nd_booking_width_100_percentage nd_booking_width_100_percentage_all_iphone nd_booking_float_left nd_booking_text_align_center nd_booking_bg_greydark">
-          <input style="background-color: #e34f1e" class="nd_options_color_white nd_options_second_font_important nd_booking_width_100_percentage nd_booking_font_weight_lighter nd_booking_letter_spacing_2 nd_booking_font_size_12 nd_booking_line_height_18 nd_booking_white_space_normal" type="submit" value="CONSULTAR DISPONIBILIDAD" />
+          <input style="background-color: #e34f1e" class="nd_options_color_white nd_options_second_font_important nd_booking_width_100_percentage nd_booking_font_weight_lighter  nd_booking_font_size_12 nd_booking_line_height_18 nd_booking_white_space_normal" type="submit" value="CONSULTAR DISPONIBILIDAD" />
         </div>
       </form>
       <!--END FORM-->

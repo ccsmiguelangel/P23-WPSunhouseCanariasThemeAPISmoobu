@@ -7,7 +7,8 @@
 
 
 @require_once plugin_dir_path(__FILE__).'public/form-picker.php';
-
+@require_once plugin_dir_path(__FILE__).'public/form-picker-alo.php';
+@require_once plugin_dir_path(__FILE__).'public/form-picker-single.php';
 // https://wordpress.stackexchange.com/questions/6731/how-do-test-if-a-post-is-a-custom-post-type
 // https://developer.wordpress.org/reference/functions/is_singular/
 // https://stackoverflow.com/questions/45734613/how-to-display-custom-meta-box-value-in-single-post-in-wordpress
@@ -283,6 +284,7 @@ function get_alo_max_people() {
 
   ob_start();
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/regular.min.css">
   <style>
     /* grandson content */
     .alocard__people-content {
@@ -300,6 +302,11 @@ function get_alo_max_people() {
       margin: 0 0 0.5rem 0;
       padding: 0;
     }
+    /*!
+ * Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face{font-family:"Font Awesome 5 Free";font-style:normal;font-weight:400;font-display:block;src:url(../webfonts/fa-regular-400.eot);src:url(../webfonts/fa-regular-400.eot?#iefix) format("embedded-opentype"),url(../webfonts/fa-regular-400.woff2) format("woff2"),url(../webfonts/fa-regular-400.woff) format("woff"),url(../webfonts/fa-regular-400.ttf) format("truetype"),url(../webfonts/fa-regular-400.svg#fontawesome) format("svg")}.far{font-family:"Font Awesome 5 Free";font-weight:400}
   </style>
   <div class="alocard__people">
     <i aria-hidden="true" class="far fa-user-circle"></i>
