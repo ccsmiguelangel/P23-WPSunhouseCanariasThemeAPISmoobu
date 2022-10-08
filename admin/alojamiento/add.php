@@ -11,5 +11,6 @@ function alojamiento_add_meta_boxes( $post ){
 	add_meta_box( 'alojamiento_meta_box_3', __( 'Página', 'alojamiento_plugin' ), 'alojamiento_build_meta_box_3', 'alojamiento', 'side', 'low' );
 	add_meta_box( 'alojamiento_meta_box_4', __( 'Similares', 'alojamiento_plugin' ), 'alojamiento_build_meta_box_4', 'alojamiento', 'side', 'low' );
 	add_meta_box( 'alojamiento_meta_box_5', __( 'Smoobu', 'alojamiento_plugin' ), 'alojamiento_build_meta_box_5', 'alojamiento', 'side', 'low' );
+	add_meta_box( 'alojamiento_meta_box_6', __( 'Comentarios', 'alojamiento_plugin' ), 'alojamiento_build_meta_box_6', 'alojamiento', 'side', 'low' );
 }
 add_action( 'add_meta_boxes_alojamiento', 'alojamiento_add_meta_boxes' );
