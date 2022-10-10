@@ -1,9 +1,10 @@
 <?php
 
-// Added styles
-require( 'config.php' );  
+// Add styles
+@require_once get_stylesheet_directory().'/config.php';
 
 // Add alojamiento config to admin
-@require( 'admin/features.php' );
+@require_once get_stylesheet_directory().'/admin/features.php';
 
-@require('shortcodes.php');
+// Add shortcodes
+@require_once get_stylesheet_directory().'/shortcodes.php';

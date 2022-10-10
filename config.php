@@ -19,16 +19,6 @@ function my_theme_enqueue_styles()
   );
 }
 
-
-
-// function set_default_editor( $type ) {
-//   global $post_type;
-//   if('alojamiento' == $post_type) 
-//   return 'html';
-//   return $type;
-// }
-// add_filter('wp_default_editor', 'set_default_editor');
-
 if (is_post_type_archive('alojamiento')) {
   function f_force_ssl() {
     if (!is_ssl()) {
@@ -39,20 +29,3 @@ if (is_post_type_archive('alojamiento')) {
   }
   add_action('template_redirect', 'f_force_ssl');
 }
-
-
-function allow_unfiltered_html_multisite( $caps, $cap, $user_id ) { 
-  if ( 'unfiltered_html' === $cap && user_can( $user_id, 'editor' ) ) {
-      $caps = array( 'unfiltered_html' );
-  }
-
-  return $caps;
-}
-
-add_filter( 'map_meta_cap', 'allow_unfiltered_html_multisite', 10, 3 );
-
-function add_cap_custom_role() {
-  $role = get_role( 'editor' );
-  $role->add_cap( 'unfiltered_html' );
-}
-add_action( 'init', 'add_cap_custom_role' );

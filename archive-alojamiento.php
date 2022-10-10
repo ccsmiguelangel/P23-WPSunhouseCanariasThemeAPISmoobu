@@ -13,8 +13,11 @@
 if (!defined('ABSPATH')) {
   exit; // Exit if accessed directly.
 }
-@require_once plugin_dir_path(__FILE__) . 'public/post-alojamiento.php';
-get_header(); ?>
+@require_once get_stylesheet_directory().'/public/archive/post-alojamiento.php';
+
+get_header(); 
+
+?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/regular.min.css">
 
 <style>
