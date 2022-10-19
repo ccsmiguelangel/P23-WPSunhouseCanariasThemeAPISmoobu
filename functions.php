@@ -1,5 +1,4 @@
 <?php
-
 // Add styles
 @require_once get_stylesheet_directory().'/config.php';
 

@@ -13,7 +13,6 @@
 if (!defined('ABSPATH')) {
   exit; // Exit if accessed directly.
 }
-@require_once get_stylesheet_directory().'/public/archive/post-alojamiento.php';
 
 get_header(); 
 
@@ -134,7 +133,7 @@ get_header();
             var_dump(get_alo_available());
             echo "<br><br><br>";
 
-            echo show_all_alo();
+            echo do_shortcode('[show_alojamientos]');
 
 
             ?>
