@@ -7,3 +7,6 @@
 
 // Add shortcodes
 @require_once get_stylesheet_directory().'/shortcodes.php';
+
+// Add API
+@require_once get_stylesheet_directory().'/includes/API/queries.php';
