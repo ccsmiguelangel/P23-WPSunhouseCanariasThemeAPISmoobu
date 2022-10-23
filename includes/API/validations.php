@@ -25,4 +25,10 @@ function p23_guest_validation($guests)
   return true;
 }
 
+function p23_price_validation($price){
+  if (empty($price)) return false;
+  if (!is_numeric($price)) return false;
+  if ($price < 1) return false;
+  return true;
+}
 // WP

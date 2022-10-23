@@ -33,6 +33,7 @@ function alojamiento_setup() {
   );
 	$args = array(
 		'labels' => $labels,
+		'label'        => 'alojamientos',
     'description' => 'Alojamientos para listar en catálogo',
 		'public' => true,
     'publicly_queryable' => true, // call from code

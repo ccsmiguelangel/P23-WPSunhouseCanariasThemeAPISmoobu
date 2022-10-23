@@ -15,7 +15,6 @@ add_action('rest_api_init', 'p23_smoobu_display_guests_comparated');
 
 
 function p23_smoobu_display_guests_comparated_callback($res){
-  
   if (!p23_date_validation($res['start_date'], $res['end_date'])) return p23_error_response(1, http_response_code());
   if(!p23_guest_validation($res['guests'])) return p23_error_response(6, http_response_code());
 

@@ -1,10 +1,28 @@
 <?php
 
-function p23_get_smoobu_from_price($start_date, $end_date, $obtained_price) {
-  if(empty($start_date) || empty($end_date) || empty($obtained_price)) return false;
-
-  $obtained_price = intval($obtained_price);
+function p23_validate_smoobu_from_price($res, $obtained_price, $only_smoobu_ids = true){
+  if(empty($res) || empty($obtained_price) || !isset($only_smoobu_ids)) return p23_into_error_response(10);
   
+  $resp = array();
+  foreach($res->prices as $key => $value){
+    if(!($obtained_price <= $value->price)) continue;
+
+    if($only_smoobu_ids){
+      $x[] = array_push($resp, intval($key));
+    } else{
+      $x[] = array_push($resp, array(
+          'id' => intval($key),
+          'price' => intval($value->price),
+        )
+      );
+    }
+  }
+  if(empty($resp))return p23_into_error_response(11);
+  return $resp;
+}
+
+function p23_get_smoobu_from_price($start_date, $end_date, $obtained_price) {
+  $obtained_price = intval($obtained_price);
   $curl = curl_init('https://login.smoobu.com/booking/checkApartmentAvailability');
   curl_setopt($curl, CURLOPT_POST, true);
   curl_setopt($curl, CURLOPT_HTTPHEADER, array(
@@ -12,7 +30,6 @@ function p23_get_smoobu_from_price($start_date, $end_date, $obtained_price) {
     'cache-control:no-cache',
     'Content-Type:application/json'
   ));
-
   $json_data = json_encode(array(
     'arrivalDate' => $start_date,
     'departureDate' => $end_date,
@@ -21,20 +38,10 @@ function p23_get_smoobu_from_price($start_date, $end_date, $obtained_price) {
   ));
   curl_setopt($curl, CURLOPT_POSTFIELDS, $json_data);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-  $response = curl_exec($curl);
-  $response = json_decode($response);
+  $resp = curl_exec($curl);
+  $resp = json_decode($resp);
   curl_close($curl);
-
-  $allow_prices_aparments = array();
-  foreach($response->prices as $key => $value){
-    if(!($value->price <= $obtained_price)) continue;
-    $x[] = array_push(
-      $allow_prices_aparments, 
-      array(
-        'id' => intval($key),
-        'price' => intval($value->price),
-      )
-    );
-  }
-  return $allow_prices_aparments;
+  
+  $resp = p23_validate_smoobu_from_price($resp, $obtained_price);
+  return $resp;
 }
