@@ -1,9 +1,7 @@
 <?php
 
 
-function p23_get_smoobu_guests($start_date, $end_date, $guests) {
-  if(empty($start_date) || empty($end_date)) return false;
-  if(($guests > 15) || ($guests < 1)) return false;
+function p23_get_smoobu_form_guests($start_date, $end_date) {
   $curl = curl_init('https://login.smoobu.com/booking/checkApartmentAvailability');
   curl_setopt($curl, CURLOPT_POST, true);
   curl_setopt($curl, CURLOPT_HTTPHEADER, array(
@@ -24,6 +22,5 @@ function p23_get_smoobu_guests($start_date, $end_date, $guests) {
   $response = curl_exec($curl);
   $response = json_decode($response);
   curl_close($curl);
-  $ids = $response;
-  return $ids;
+  return $response->availableApartments;
 }

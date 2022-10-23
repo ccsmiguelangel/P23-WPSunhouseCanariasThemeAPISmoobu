@@ -11,19 +11,9 @@ function p23_smoobu_display_apartments(){
 }
 add_action('rest_api_init', 'p23_smoobu_display_apartments');
 
-function p23_smoobu_display_apartments_callback($res){
-  $apartments = p23_smoobu_get_apartmens();
-  $errorRes = (object) array(
-    'code' => http_response_code(),
-    'message' => "Error, empty apartments"
-  );
+function p23_smoobu_display_apartments_callback(){
+  $resp = p23_smoobu_get_apartmens();
+  if (empty($resp)) return p23_error_response(2, http_response_code());
 
-  if(empty($apartments)) return $errorRes;
-  
-  $res = (object)array(
-    'code' => http_response_code(),
-    'data' => $apartments->apartments,
-  );
-
-  return $res;
+  return p23_validated_response($resp, http_response_code());
 }

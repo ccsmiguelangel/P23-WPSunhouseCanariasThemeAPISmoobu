@@ -1,19 +1,22 @@
 <?php
 
-function p23_get_wp_apartments(){
+function p23_get_wp_apartments($only_smoobu_id = true){
   $alojamiento = get_posts([
     'post_type' => 'alojamiento',
     'post_status' => 'publish',
     'numberposts' => -1,
-    // 'orderby' => 'rand',
   ]);
-  // _alojamiento_smoobu_id
-  $ids = [];
+  $resp = [];
   foreach ($alojamiento as $alo) {
-    $id = $alo->ID;
-    
-    $smoobu_ids = get_post_meta($id, '_alojamiento_smoobu_id', true);
-    $new = array_push($ids, $smoobu_ids);
+    $smoobu_ids = get_post_meta($alo->ID, '_alojamiento_smoobu_id', true);
+    if($only_smoobu_id) {
+      $x[] = array_push($resp, $smoobu_ids);
+    } else  {
+      array_push($resp, array(
+        'smoobuID' => $smoobu_ids,
+        'wpID' => $alo->ID
+      ));
+    }
   }
-  return $ids;
+  return $resp;
 }

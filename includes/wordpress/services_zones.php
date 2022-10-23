@@ -1,6 +1,6 @@
 <?php
 
-function p23_get_wp_services_zones($arg)
+function p23_get_wp_services_or_zones($arg)
 {
 
   $args_zonas = array(

@@ -2,8 +2,6 @@
 
 
 function p23_get_smoobu_from_date($start_date, $end_date) {
-  if(empty($start_date) || empty($end_date)) return false;
-  
   $curl = curl_init('https://login.smoobu.com/booking/checkApartmentAvailability');
   curl_setopt($curl, CURLOPT_POST, true);
   curl_setopt($curl, CURLOPT_HTTPHEADER, array(

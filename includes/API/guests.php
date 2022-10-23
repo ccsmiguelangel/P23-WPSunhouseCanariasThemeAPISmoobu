@@ -1,5 +1,7 @@
 <?php
 
+//NOTE: SMOOBU DONT SAVE MAX/MIN GUESTS DATA, THIS DATA IS SAVED IN WP
+
 function p23_smoobu_display_guests_response(){
 
   $namespace = 'alo'; //wp.com/wp-json/alo
@@ -15,29 +17,12 @@ function p23_smoobu_display_guests_response(){
 add_action('rest_api_init', 'p23_smoobu_display_guests_response');
 
 function p23_smoobu_display_guests_response_callback($res){
-  
-  $errRes = (object)array(
-    'code' => http_response_code(),
-    'message' => "We don't have apartments response, you used a date incorrect, you dont send start_date end_date or guests numbers"
-  );
+  if (!p23_date_validation($res['start_date'], $res['end_date'])) return p23_error_response(1, http_response_code());
 
-  $Date = date("Y-m-d");
-  if(empty($res['start_date']) || empty($res['end_date'])) return $errRes;
+  $resp = p23_get_smoobu_from_date($res['start_date'], $res['end_date']);
+  if (empty($resp)) return p23_error_response(2, http_response_code());
 
-  if(!($Date < $res['start_date']) || !($Date < $res['end_date'])) return $errRes;
-  if(date("Y-m-d", strtotime($Date. ' + 3 days')) > $res['end_date']) return $errRes;
+  $resp = p23_get_smoobu_form_guests($res['start_date'], $res['end_date']);
 
-
-  // if(empty($res['guests'])) return $errRes;
-  $guests = intval($res['guests']);
-  
-  $apartments = p23_get_smoobu_guests($res['start_date'], $res['end_date'], $guests);
-  // if (empty($apartments)) return $errRes;
-
-  $dateArray = (object)array(
-    'code' => http_response_code(),
-    'data' => $apartments,
-  );
-  return $dateArray;
-  // return $res['start_date'];
+  return p23_validated_response($resp, http_response_code());
 }
