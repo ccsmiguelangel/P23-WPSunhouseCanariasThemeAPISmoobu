@@ -23,6 +23,8 @@ function p23_error_response($value, $response_code)
       case 9: $msg = "Invalid price."; break;
       case 10:$msg = "Empty price values."; break;
       case 11:$msg = "There are no similarities in price values between wordpress query and smoobu."; break;
+      case 12:$msg = "Empty services values."; break;
+      case 13:$msg = "Empty zones values."; break;
     }
   }
   if($isArray){

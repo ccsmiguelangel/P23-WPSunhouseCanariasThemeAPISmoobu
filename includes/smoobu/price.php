@@ -5,7 +5,7 @@ function p23_validate_smoobu_from_price($res, $obtained_price, $only_smoobu_ids 
   
   $resp = array();
   foreach($res->prices as $key => $value){
-    if(!($obtained_price <= $value->price)) continue;
+    if(!($value->price <= $obtained_price)) continue;
 
     if($only_smoobu_ids){
       $x[] = array_push($resp, intval($key));

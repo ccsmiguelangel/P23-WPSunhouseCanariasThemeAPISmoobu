@@ -5,6 +5,11 @@
 @require get_stylesheet_directory().'/includes/API/validations.php';
 @require get_stylesheet_directory().'/includes/API/responses.php';
 @require get_stylesheet_directory().'/includes/compare.php';
+// TEST
+@require get_stylesheet_directory().'/includes/wordpress/smoobu_id_to_post_id.php';
+@require get_stylesheet_directory().'/includes/wordpress/services_zones.php';
+@require get_stylesheet_directory().'/includes/wordpress/taxonomies.php';
+@require get_stylesheet_directory().'/includes/API/test.php';
 
 // Get Apartments (apartments.php)
 @require get_stylesheet_directory().'/includes/smoobu/apartments.php';
@@ -36,8 +41,5 @@
 // Comparated Wordpress with Smoobu Price
 @require get_stylesheet_directory().'/includes/API/price_wp.php';
 
+@require get_stylesheet_directory().'/includes/API/services_zones.php';
 
-
-// TEST
-@require get_stylesheet_directory().'/includes/wordpress/smoobu_id_to_post_id.php';
-@require get_stylesheet_directory().'/includes/API/test.php';

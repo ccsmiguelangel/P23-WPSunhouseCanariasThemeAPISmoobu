@@ -11,7 +11,7 @@ function p23_date_validation($start_date, $end_date)
   $Date = date("Y-m-d");
   if (!($Date < $start_date) || !($Date < $end_date)) return false;
   if (($start_date > $end_date)) return false;
-  if (date("Y-m-d", strtotime($Date . ' + 3 days')) > $end_date) return false;
+  if (date("Y-m-d", strtotime($Date . ' + 5 days')) > $end_date) return false;
 
   return true;
 }
@@ -29,6 +29,13 @@ function p23_price_validation($price){
   if (empty($price)) return false;
   if (!is_numeric($price)) return false;
   if ($price < 1) return false;
+  return true;
+}
+
+function p23_service_zone_validation($id){
+  if (empty($id)) return false;
+  // if (!is_numeric($id)) return false;
+  // if ($id < 1) return false;
   return true;
 }
 // WP

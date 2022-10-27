@@ -11,13 +11,9 @@ function p23_test(){
 }
 add_action('rest_api_init', 'p23_test');
 
-function p23_test_callback(){
-  $smoobu_id = 1069525;
-  $elem = p23_set_smoobu_id_to_wp_post_id($smoobu_id, false);
-  $res = (object)array(
-    'code' => http_response_code(),
-    'data' => $elem,
-  );
+function p23_test_callback($res){
+  $resp = p23_get_wp_services_or_zones('zonas');
 
-  return $res;
+
+  return $resp;
 }
