@@ -24,7 +24,7 @@ function p23_wp_display_date_response_callback($res){
   $resp = p23_smoobu_wp_compare_arrays($resp, $wp_apartments);
   if (empty($resp)) return p23_error_response(4, http_response_code());
  
-  $resp = p23_set_multiple_smoobu_ids_to_wp_post_ids($resp, false);
+  $resp = p23_set_multiple_smoobu_ids_to_wp_post_ids($resp);
   if (empty($resp)) return p23_error_response(5, http_response_code());
 
   return p23_validated_response($resp, http_response_code());

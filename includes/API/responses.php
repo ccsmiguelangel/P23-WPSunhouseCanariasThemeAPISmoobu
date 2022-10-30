@@ -25,6 +25,8 @@ function p23_error_response($value, $response_code)
       case 11:$msg = "There are no similarities in price values between wordpress query and smoobu."; break;
       case 12:$msg = "Empty services values."; break;
       case 13:$msg = "Empty zones values."; break;
+      case 14:$msg = "There are no similarities in values between wordpress services and parsed data."; break;
+      case 15:$msg = "There are no similarities in values between wordpress zones and parsed data."; break;
     }
   }
   if($isArray){

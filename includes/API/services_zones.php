@@ -73,7 +73,7 @@ function p23_smoobu_display_zones_callback($res) {
   if(!p23_date_validation($res['start_date'], $res['end_date'])) return p23_error_response(1, http_response_code());
   if(!p23_guest_validation($res['guests'])) return p23_error_response(6, http_response_code());
   if(!p23_price_validation($res['price'])) return p23_error_response(9, http_response_code());
-  if(!p23_service_zone_validation($res['zones'])) return p23_error_response(12, http_response_code());
+  if(!p23_service_zone_validation($res['zones'])) return p23_error_response(13, http_response_code());
  
   $resp = p23_get_smoobu_from_date($res['start_date'], $res['end_date']);
   if (empty($resp)) return p23_error_response(2, http_response_code());

@@ -10,3 +10,6 @@
 
 // Add API
 @require_once get_stylesheet_directory().'/includes/API/queries.php';
+
+// Public Queues
+@require_once get_stylesheet_directory().'/public/queues.php';
