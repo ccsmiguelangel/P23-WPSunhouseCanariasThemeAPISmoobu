@@ -9,7 +9,7 @@ function p23_date_validation($start_date, $end_date)
   if (empty($start_date) || empty($end_date)) return false;
 
   $Date = date("Y-m-d");
-  if (!($Date < $start_date) || !($Date < $end_date)) return false;
+  if (!($Date <= $start_date) || !($Date < $end_date)) return false;
   if (($start_date > $end_date)) return false;
   if (date("Y-m-d", strtotime($Date . ' + 5 days')) > $end_date) return false;
 

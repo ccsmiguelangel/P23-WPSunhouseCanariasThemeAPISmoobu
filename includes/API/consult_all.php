@@ -17,7 +17,7 @@ function p23_consult_all_apartments_data($res){
   if(!p23_date_validation($res['start_date'], $res['end_date'])) return p23_error_response(1, http_response_code());
   if(!p23_guest_validation($res['guests'])) return p23_error_response(6, http_response_code());
   if(!p23_price_validation($res['price'])) return p23_error_response(9, http_response_code());
-//  Block consult if service or zone is empty
+  // Block consult if service or zone is empty
   // if(!p23_service_zone_validation($res['services'])) return p23_error_response(12, http_response_code());
   // if(!p23_service_zone_validation($res['zones'])) return p23_error_response(13, http_response_code());
  
@@ -45,41 +45,44 @@ function p23_consult_all_apartments_data($res){
 
 
   
-  if(!empty($res['services'])){
+  if(!empty($res['services'][0])){
     // Get all service
     $allServices = p23_get_wp_services_or_zones('servicios');
 
     // Get post per services
     $serviceIds = p23_smoobu_wp_compare_arrays(array_map('intval',$res['services']), $allServices);
     if (empty($serviceIds)) return p23_error_response(12, http_response_code());
-    $allPostPerService = p23_get_post_from_term_id('servicios', $serviceIds);
+    $allPostPerService = p23_get_post_from_term_id('servicios', $serviceIds);  
     if (empty($allPostPerService)) return p23_error_response(14, http_response_code());
     
     $resp = p23_smoobu_wp_compare_arrays($resp, $allPostPerService);
+    if (empty($resp)) return p23_error_response(4, http_response_code());
   }
 
-  if(!empty($res['zones'])){
+  if(!empty($res['zones'][0])){
     // Get all zones
     $allZones = p23_get_wp_services_or_zones('zonas');
 
     // Get post per zones
-    $zoneIds = p23_get_post_from_term_id(array_map('intval',$res['zones']), $allZones);
+    $zoneIds = p23_smoobu_wp_compare_arrays(array_map('intval',$res['zones']), $allZones);
     if (empty($zoneIds)) return p23_error_response(13, http_response_code());
-    $allPostPerZones = p23_get_post_from_term_id('servicios', $zoneIds);
+    $allPostPerZones = p23_get_post_from_term_id('zonas', $zoneIds);
     if (empty($allPostPerZones)) return p23_error_response(15, http_response_code());
 
     $resp = p23_smoobu_wp_compare_arrays($resp, $allPostPerZones);
+    if (empty($resp)) return p23_error_response(4, http_response_code());
   }
 
-  return $resp;
-  // return p23_validated_response($resp, http_response_code());
+  // return $resp;
+  return p23_validated_response($resp, http_response_code());
 }
 
 function p23_consult_all_apartments_data_to_show_callback($res){
   $IDs = p23_consult_all_apartments_data($res);
+  if(empty($IDs->data)) return $IDs;
 
-  $resp = p23_display_multiple_alo_data($IDs);
+  $resp = p23_display_multiple_alo_data($IDs->data);
+  if (empty($resp)) return p23_error_response(16, http_response_code());
 
-  
   return $resp;
 }

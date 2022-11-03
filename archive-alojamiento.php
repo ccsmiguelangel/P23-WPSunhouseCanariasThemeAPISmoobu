@@ -27,8 +27,11 @@ get_header();
         </div>
       </div>
       <div class="elementor-column elementor-col-50 w-67 elementor-top-column elementor-element">
-        <div class="elementor-widget-wrap elementor-element-populated">
-          <div class="alocard__list elementor-column elementor-col-100 elementor-top-column nd_booking_archive_search_masonry_container" data-id="4fa7db83" data-element_type="column">
+        <div class="elementor-widget-wrap elementor-element-populated" id="alo_content">
+        <div id="p23_loader" style="width:100%; display: none; justify-content: center;">
+          <div class="lds-ring"><div></div><div></div><div></div><div></div></div>  
+        </div>
+        <div class="alocard__list elementor-column elementor-col-100 elementor-top-column nd_booking_archive_search_masonry_container" data-id="4fa7db83" data-element_type="column">
             <?php
             echo do_shortcode('[show_alojamientos]');
             ?>

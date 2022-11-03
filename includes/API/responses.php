@@ -27,6 +27,7 @@ function p23_error_response($value, $response_code)
       case 13:$msg = "Empty zones values."; break;
       case 14:$msg = "There are no similarities in values between wordpress services and parsed data."; break;
       case 15:$msg = "There are no similarities in values between wordpress zones and parsed data."; break;
+      case 16:$msg = "There are no similarities in values between wordpress and parsed data."; break;
     }
   }
   if($isArray){

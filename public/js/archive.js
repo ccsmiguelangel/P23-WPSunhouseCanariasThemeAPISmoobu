@@ -24,6 +24,58 @@ jQuery(document).ready(function () {
 
       return format;
     }
+
+    function similar_rooms(res) {
+      let html = `
+        <div class="alocard">
+          <div class="alocard__container">
+            <div class="alocard__image-row">
+              <div class="alocard__image">
+                <a href=" ${res.url}; ">
+                  <img class="alocard__image-content" width="700" height="524" src="${
+                    res.image_url
+                  };" alt="" loading="lazy" srcset="
+                          ${
+                            res.image_url
+                          }; " sizes="(max-width: 700px) 100vw, 700px" />
+                </a>
+              </div>
+            </div>
+
+            <div class="alocard__content-row">
+              <div class="alocard__title">
+                <h2 class="alocard__title-content">${res.title}</h2>
+              </div>
+
+              <div class="alocard__subtitle">
+                <i aria-hidden="true" class="far fa-user-circle"></i>
+                <h3 class="alocard__subtitle-content">${res.zone}</h3>
+              </div>
+
+              <div class="alocard__people">
+                <span class="alocard__people-icon"></span>
+                <h3 class="alocard__people-content">${
+                  res.guest > 1
+                    ? res.guest + " Huéspedes"
+                    : res.guest + "Huésped"
+                }</h3>
+              </div>
+
+              <div class="alocard__descripcion">
+                <p class="alocard__description-content">
+                    ${res.description}
+                </p>
+              </div>
+
+              <div class="alocard__action">
+                <a class="alocard__btn" href="${res.url}">SABER MÁS</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      return html;
+    }
     //START function
     function nd_booking_sorting(paged) {
       jQuery("body").append(
@@ -75,32 +127,68 @@ jQuery(document).ready(function () {
       var nd_booking_archive_form_max_price_for_day = jQuery(
         "#nd_booking_archive_form_max_price_for_day"
       ).val();
-      var nd_booking_archive_form_services = jQuery(
-        "#nd_booking_archive_form_services"
-      ).val();
-      var nd_booking_archive_form_additional_services = jQuery(
-        "#nd_booking_archive_form_additional_services"
-      ).val();
+      var nd_booking_archive_form_services = [];
+      jQuery.each(
+        jQuery("[name='nd_booking_service_id[]']:checked"),
+        function () {
+          nd_booking_archive_form_services.push(jQuery(this).val());
+        }
+      );
+
+      var nd_booking_archive_form_additional_services = [];
+      jQuery.each(
+        jQuery("[name='nd_booking_archive_form_zones[]']:checked"),
+        function () {
+          nd_booking_archive_form_additional_services.push(jQuery(this).val());
+        }
+      );
+
       var nd_booking_archive_form_branch_stars = jQuery(
         "#nd_booking_archive_form_branch_stars"
       ).val();
 
-      jQuery.get(
-        "http://localhost/001BusinessSunhouse/wp-json/alo/date_wp/",
-        {
-          start_date: p23_changeDateFormat(
-            nd_booking_archive_form_date_range_from,
-            "yyyy-MM-dd"
-          ),
-          end_date: p23_changeDateFormat(
-            nd_booking_archive_form_date_range_to,
-            "yyyy-MM-dd"
-          ),
-        },
-        function nd_booking_sorting_result(nd_booking_sorting_result) {
+      let consult_data = jQuery.param({
+        start_date: p23_changeDateFormat(
+          nd_booking_archive_form_date_range_from,
+          "yyyy-MM-dd"
+        ),
+        end_date: p23_changeDateFormat(
+          nd_booking_archive_form_date_range_to,
+          "yyyy-MM-dd"
+        ),
+        guests: nd_booking_archive_form_guests,
+        price: nd_booking_archive_form_max_price_for_day,
+        services: nd_booking_archive_form_services,
+        zones: nd_booking_archive_form_additional_services,
+      });
+
+      consult_data = decodeURIComponent(consult_data);
+      jQuery.ajax({
+        type: 'GET',
+        url: "http://localhost/001BusinessSunhouse/wp-json/alo/consult_all/",
+        data: consult_data,
+        success: function nd_booking_sorting_result(nd_booking_sorting_result) {
+          let similar_rooms_html = "";
+          !(nd_booking_sorting_result.data === "")
+            ? nd_booking_sorting_result.data.forEach(
+                (item) => (similar_rooms_html += similar_rooms(item))
+              )
+            : "";
+
+          front = `<div class="alocard__list elementor-column elementor-col-100 elementor-top-column nd_booking_archive_search_masonry_container" data-id="4fa7db83" data-element_type="column">${similar_rooms_html}</div>`;
+          error =
+            '<div class="alocard__list elementor-column elementor-col-100 elementor-top-column nd_booking_archive_search_masonry_container" data-id="4fa7db83" data-element_type="column"><div class="nd_booking_section"><h6 class="nd_booking_float_left">No hay alojamientos disponibles para las fechas seleccionadas.</h6></div></div>';
+          !(nd_booking_sorting_result.data === "")
+            ? jQuery("#alo_content").append(front)
+            : jQuery("#alo_content").append(error);
           console.log(nd_booking_sorting_result);
+          jQuery('#p23_loader').css('display', 'none');
+        },
+        beforeSend: function(){
+          jQuery('#p23_loader').css('display', 'flex');
+          jQuery(".alocard__list").remove();
         }
-      );
+      });
       // START post method
       // jQuery.get(
 
@@ -146,56 +234,66 @@ jQuery(document).ready(function () {
     }
     // END function
 
-    let date = new Date();
-    let today = date.getDate();
-    let mounthNames = [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
-    ];
-    let mounthNamesShort = [
-      "Ene",
-      "Feb",
-      "Mar",
-      "Abr",
-      "May",
-      "Jun",
-      "Jul",
-      "Ago",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    let currentMonthNameShort = mounthNamesShort[date.getMonth()];
-    let nextMonthNameShort = mounthNamesShort[date.getMonth() + 1];
-    lastDayOfMonth = new Date(
-      date.getFullYear(),
-      date.getMonth() + 1,
-      0
-    ).getDate();
+    // let date = new Date();
+    // let today = date.getDate();
+    // let mounthNames = [
+    //   "Enero",
+    //   "Febrero",
+    //   "Marzo",
+    //   "Abril",
+    //   "Mayo",
+    //   "Junio",
+    //   "Julio",
+    //   "Agosto",
+    //   "Septiembre",
+    //   "Octubre",
+    //   "Noviembre",
+    //   "Diciembre",
+    // ];
+    // let mounthNamesShort = [
+    //   "Ene",
+    //   "Feb",
+    //   "Mar",
+    //   "Abr",
+    //   "May",
+    //   "Jun",
+    //   "Jul",
+    //   "Ago",
+    //   "Sep",
+    //   "Oct",
+    //   "Nov",
+    //   "Dec",
+    // ];
+    // let currentMonthNameShort = mounthNamesShort[date.getMonth()];
+    // let nextMonthNameShort = mounthNamesShort[date.getMonth() + 1];
+    // lastDayOfMonth = new Date(
+    //   date.getFullYear(),
+    //   date.getMonth() + 1,
+    //   0
+    // ).getDate();
 
-    isLastDayOfMonth = today + 4 >= lastDayOfMonth;
+    // isLastDayOfMonth = today + 5 >= lastDayOfMonth;
 
-    document.querySelector("#nd_booking_date_number_from_front").innerHTML =
-      today;
-    document.querySelector("#nd_booking_date_number_to_front").innerHTML =
-      !isLastDayOfMonth ? today + 5 : 1;
+    // document.querySelector("#nd_booking_date_number_from_front").innerHTML = (today > 10)? today : '0'+today;
+    // let end_date_value;
+    // if(!isLastDayOfMonth){
+    //   ((today + 5) >= 10)? end_date_value = today + 5: end_date_value = '0'+(today+5) 
+    // } 
+    // document.querySelector("#nd_booking_date_number_to_front").innerHTML = end_date_value;
 
-    document.querySelector("#nd_booking_date_month_from_front").innerHTML =
-      currentMonthNameShort;
-    document.querySelector("#nd_booking_date_month_to_front").innerHTML =
-      !isLastDayOfMonth ? currentMonthNameShort : nextMonthNameShort;
-    // div
+    // document.querySelector("#nd_booking_date_month_from_front").innerHTML =
+    //   currentMonthNameShort;
+    // document.querySelector("#nd_booking_date_month_to_front").innerHTML =
+    //   !isLastDayOfMonth ? currentMonthNameShort : nextMonthNameShort;
+    // document.querySelector('.nd_booking_nights_number').innerHTML = 5;
+    // document.querySelector("#nd_booking_date_number_from_front").innerHTML = '-';
+    // document.querySelector("#nd_booking_date_month_from_front").innerHTML = '-'
+
+    // document.querySelector("#nd_booking_date_number_to_front").innerHTML = '-';
+    // document.querySelector("#nd_booking_date_month_to_front").innerHTML = '-';
+    // document.querySelector('.nd_booking_nights_number').innerHTML = 5;
+    
+      // div
     $("#nd_booking_archive_form_date_range_from").datepicker({
       defaultDate: "+1w",
       minDate: 0,
@@ -278,7 +376,7 @@ jQuery(document).ready(function () {
     });
 
     $("#nd_booking_archive_form_date_range_to").datepicker({
-      defaultDate: "+5w",
+      defaultDate: "+5d",
       altField: "#nd_booking_date_month_to",
       altFormat: "M",
       minDate: "+5d",
@@ -346,7 +444,7 @@ jQuery(document).ready(function () {
         $("#nd_booking_date_month_to_front").text(nd_booking_date_month_to);
 
         nd_booking_get_nights();
-        // nd_booking_sorting(1);
+        nd_booking_sorting(1);
       },
     });
 
@@ -380,7 +478,7 @@ jQuery(document).ready(function () {
       value++;
       $(".nd_booking_guests_number").text(value);
       $("#nd_booking_archive_form_guests").val(value);
-      // nd_booking_sorting(1);
+      nd_booking_sorting(1);
     });
 
     $(".nd_booking_guests_decrease").click(function () {
@@ -390,20 +488,20 @@ jQuery(document).ready(function () {
         value--;
         $(".nd_booking_guests_number").text(value);
         $("#nd_booking_archive_form_guests").val(value);
-        // nd_booking_sorting(1);
+        nd_booking_sorting(1);
       }
     });
     // div
     $("#nd_booking_slider_range").slider({
       range: "min",
-      value: 300,
+      value: 700,
       min: 1,
       max: 700,
       slide: function (event, ui) {
         $("#nd_booking_archive_form_max_price_for_day").val("" + ui.value);
       },
       change: function (event, ui) {
-        // nd_booking_sorting(1);
+        nd_booking_sorting(1);
       },
     });
     $("#nd_booking_archive_form_max_price_for_day").val(
@@ -420,7 +518,7 @@ jQuery(document).ready(function () {
           nd_booking_service_value + nd_booking_service_previous_value
         );
 
-        // nd_booking_sorting(1);
+        nd_booking_sorting(1);
       } else {
         var nd_booking_service_value = $(this).val();
         var nd_booking_service_previous_value = $(
@@ -436,7 +534,7 @@ jQuery(document).ready(function () {
           nd_booking_archive_form_services
         );
 
-        // nd_booking_sorting(1);
+        nd_booking_sorting(1);
       }
     });
 
