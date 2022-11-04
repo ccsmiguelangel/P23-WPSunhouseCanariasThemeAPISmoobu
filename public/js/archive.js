@@ -180,7 +180,6 @@ jQuery(document).ready(function () {
       });
 
       consult_data = decodeURIComponent(consult_data);
-      console.log(consult_data);
       jQuery.ajax({
         type: 'GET',
         url: "http://localhost/001BusinessSunhouse/wp-json/alo/consult_all/",
@@ -203,7 +202,6 @@ jQuery(document).ready(function () {
               ? jQuery("#alo_content").append(front)
               : jQuery("#alo_content").append(error);
               jQuery('#p23_loader').css('display', 'none');
-              console.log(nd_booking_sorting_result);
           },
           beforeSend: function(){
           jQuery('#p23_loader').css('display', 'flex');
@@ -288,7 +286,7 @@ jQuery(document).ready(function () {
         document.querySelector(".nd_booking_guests_number").innerHTML= paramsActualUrl.nd_booking_archive_form_guests[0];
         document.querySelector("#nd_booking_archive_form_guests").value = paramsActualUrl.nd_booking_archive_form_guests[0];
       } 
-      
+
       setTimeout(() => {
         document.querySelector("#nd_booking_archive_form_date_range_from").value = paramsActualUrl.nd_booking_archive_form_date_range_from[0];
         document.querySelector("#nd_booking_archive_form_date_range_to").value = paramsActualUrl.nd_booking_archive_form_date_range_to[0];
