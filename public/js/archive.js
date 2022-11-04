@@ -284,14 +284,14 @@ jQuery(document).ready(function () {
       
       document.querySelector("#nd_booking_date_month_from_front").innerHTML = mounthNamesShort[day.getMonth()];
       document.querySelector("#nd_booking_date_month_to_front").innerHTML = mounthNamesShort[end_date_value.getMonth()];
-      
-      document.querySelector("#nd_booking_archive_form_date_range_from").value = paramsActualUrl.nd_booking_archive_form_date_range_from[0];
-      document.querySelector("#nd_booking_archive_form_date_range_to").value = paramsActualUrl.nd_booking_archive_form_date_range_to[0];
       if (paramsActualUrl.nd_booking_archive_form_guests[0]){
         document.querySelector(".nd_booking_guests_number").innerHTML= paramsActualUrl.nd_booking_archive_form_guests[0];
         document.querySelector("#nd_booking_archive_form_guests").value = paramsActualUrl.nd_booking_archive_form_guests[0];
       } 
+      
       setTimeout(() => {
+        document.querySelector("#nd_booking_archive_form_date_range_from").value = paramsActualUrl.nd_booking_archive_form_date_range_from[0];
+        document.querySelector("#nd_booking_archive_form_date_range_to").value = paramsActualUrl.nd_booking_archive_form_date_range_to[0];
         nd_booking_sorting(1);
       }, 1000)
   }
