@@ -18,9 +18,7 @@ function p23_form_picker_alo()
             <div class="nd_booking_section nd_booking_height_15"></div>
             <div class="nd_booking_display_inline_flex">
               <div class="nd_booking_float_left nd_booking_text_align_right">
-                <h1 id="nd_booking_date_number_from_front" class="nd_booking_font_size_50 nd_booking_color_yellow_important">
-                  -
-                </h1>
+                <h1 id="nd_booking_date_number_from_front" class="nd_booking_font_size_50 nd_booking_color_yellow_important">-</h1>
               </div>
               <div class="nd_booking_float_right nd_booking_text_align_center nd_booking_margin_left_10">
                 <h6 id="nd_booking_date_month_from_front" class="nd_booking_color_yellow_important nd_booking_margin_top_7 nd_booking_font_size_12">
@@ -46,9 +44,7 @@ function p23_form_picker_alo()
             <div class="nd_booking_section nd_booking_height_15"></div>
             <div class="nd_booking_display_inline_flex">
               <div class="nd_booking_float_left nd_booking_text_align_right">
-                <h1 id="nd_booking_date_number_to_front" class="nd_booking_font_size_50 nd_booking_color_yellow_important">
-                  -
-                </h1>
+                <h1 id="nd_booking_date_number_to_front" class="nd_booking_font_size_50 nd_booking_color_yellow_important">-</h1>
               </div>
               <div class="nd_booking_float_right nd_booking_text_align_center nd_booking_margin_left_10">
                 <h6 id="nd_booking_date_month_to_front" class="nd_booking_color_yellow_important nd_booking_margin_top_7 nd_booking_font_size_12">

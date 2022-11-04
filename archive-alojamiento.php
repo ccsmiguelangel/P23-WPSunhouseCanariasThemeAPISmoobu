@@ -31,7 +31,7 @@ get_header();
         <div id="p23_loader" style="width:100%; display: none; justify-content: center;">
           <div class="lds-ring"><div></div><div></div><div></div><div></div></div>  
         </div>
-        <div class="alocard__list elementor-column elementor-col-100 elementor-top-column nd_booking_archive_search_masonry_container" data-id="4fa7db83" data-element_type="column">
+        <div id="alocard_list" class="alocard__list elementor-column elementor-col-100 elementor-top-column nd_booking_archive_search_masonry_container" data-id="4fa7db83" data-element_type="column">
             <?php
             echo do_shortcode('[show_alojamientos]');
             ?>

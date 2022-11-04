@@ -2650,7 +2650,7 @@ function p23_form_picker()
             isLastDayOfMonth = today === lastDayOfMonth;
 
             document.querySelector('#nd_booking_date_number_from_front').innerHTML = today;
-            document.querySelector('#nd_booking_date_number_to_front').innerHTML = (!isLastDayOfMonth)? today + 1 : 1;
+            document.querySelector('#nd_booking_date_number_to_front').innerHTML = (!isLastDayOfMonth)? today + 5 : 1;
 
             document.querySelector('#nd_booking_date_month_from_front').innerHTML = currentMonthNameShort;
             document.querySelector('#nd_booking_date_month_to_front').innerHTML = (!isLastDayOfMonth )? currentMonthNameShort : nextMonthNameShort;
@@ -2659,7 +2659,7 @@ function p23_form_picker()
               jQuery(function($) {
 
                 $("#nd_booking_archive_form_date_range_from").datepicker({
-                  defaultDate: "+1w",
+                  defaultDate: "+5d",
                   minDate: 0,
                   altField: "#nd_booking_date_month_from",
                   altFormat: "M",
@@ -2674,7 +2674,7 @@ function p23_form_picker()
                   numberOfMonths: 1,
                   onClose: function() {
                     var minDate = $(this).datepicker("getDate");
-                    var newMin = new Date(minDate.setDate(minDate.getDate() + 1));
+                    var newMin = new Date(minDate.setDate(minDate.getDate() + 5));
                     $("#nd_booking_archive_form_date_range_to").datepicker(
                       "option",
                       "minDate",
@@ -2724,7 +2724,7 @@ function p23_form_picker()
                   defaultDate: "+1w",
                   altField: "#nd_booking_date_month_to",
                   altFormat: "M",
-                  minDate: "+1d",
+                  minDate: "+5d",
                   monthNames: mounthNames,
                   monthNamesShort: mounthNamesShort,
                   dayNamesMin: ["SU", "MO", "TU", "WE", "TH", "FR", "SA"],
