@@ -16,6 +16,7 @@
 @require_once get_stylesheet_directory().'/public/shortcodes/single/comments.php';
 @require_once get_stylesheet_directory().'/public/shortcodes/single/rooms.php';
 @require_once get_stylesheet_directory().'/public/shortcodes/single/services.php';
+@require_once get_stylesheet_directory().'/public/shortcodes/single/zone.php';
 @require_once get_stylesheet_directory().'/public/shortcodes/single/max-people.php';
 
 // Global

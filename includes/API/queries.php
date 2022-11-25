@@ -46,3 +46,6 @@
 // Compare all instruments
 @require get_stylesheet_directory().'/includes/wordpress/consult_all.php';
 @require get_stylesheet_directory().'/includes/API/consult_all.php';
+
+@require get_stylesheet_directory().'/includes/API/single_responses.php';
+@require get_stylesheet_directory().'/includes/API/single_wp.php';

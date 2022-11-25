@@ -2668,8 +2668,8 @@ function p23_form_picker()
                   monthNames: mounthNames,
                   monthNamesShort: mounthNamesShort,
                   dayNamesMin: ["LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"],
-                  nextText: "SIG",
-                  prevText: "ANT",
+                  nextText: ">>",
+                  prevText: "<<",
                   changeMonth: false,
                   numberOfMonths: 1,
                   onClose: function() {

@@ -18,7 +18,7 @@ jQuery(document).ready(function () {
           parms[n].push(nv.length === 2 ? v : null);
       }
       return parms;
-  }
+    }
     function p23_changeDateFormat(inputDate, format) {
       //parse the input date
       let date = new Date(inputDate);
@@ -44,13 +44,19 @@ jQuery(document).ready(function () {
       return format;
     }
 
-    function similar_rooms(res) {
+    function similar_rooms(res, consult_data = []) {
+
+      let start_date = consult_data.start_date.replace(/-/g, '/');
+      let end_date = consult_data.end_date.replace(/-/g, '/');
+      start_date = p23_changeDateFormat(start_date, 'MM%2Fdd%2Fyyyy');
+      end_date =  p23_changeDateFormat(end_date, 'MM%2Fdd%2Fyyyy');
+
       let html = `
         <div class="alocard">
           <div class="alocard__container">
             <div class="alocard__image-row">
               <div class="alocard__image">
-                <a href=" ${res.url}; ">
+                <a href="${res.url}?nd_booking_archive_form_date_range_from=${start_date}&nd_booking_archive_form_date_range_to=${end_date}&nd_booking_archive_form_guests=${consult_data.guests}">
                   <img class="alocard__image-content" width="700" height="524" src="${
                     res.image_url
                   }" alt="" loading="lazy" srcset="${res.image_url}" sizes="(max-width: 700px) 100vw, 700px" />
@@ -84,7 +90,7 @@ jQuery(document).ready(function () {
               </div>
 
               <div class="alocard__action">
-                <a class="alocard__btn" href="${res.url}">SABER MÁS</a>
+                <a class="alocard__btn" href="${res.url}?nd_booking_archive_form_date_range_from=${start_date}&nd_booking_archive_form_date_range_to=${end_date}&nd_booking_archive_form_guests=${consult_data.guests}">SABER MÁS</a>
               </div>
             </div>
           </div>
@@ -167,22 +173,21 @@ jQuery(document).ready(function () {
 
       let number_from_front = document.querySelector('#nd_booking_date_number_from_front').textContent;
       let date_range_form; 
-      let date_range_to;
+      let date_range_to;  
       (number_from_front === '-')? date_range_form = '-' : date_range_form =  p23_changeDateFormat(nd_booking_archive_form_date_range_from,"yyyy-MM-dd");
       (number_from_front === '-')? date_range_to = '-' : date_range_to =   p23_changeDateFormat(nd_booking_archive_form_date_range_to,"yyyy-MM-dd");
-      let consult_data = jQuery.param({
+      let consult_data = {
         start_date: date_range_form,
         end_date: date_range_to,
         guests: nd_booking_archive_form_guests,
         price: nd_booking_archive_form_max_price_for_day,
         services: nd_booking_archive_form_services,
         zones: nd_booking_archive_form_additional_services,
-      });
-
-      consult_data = decodeURIComponent(consult_data);
+      }; //jQuery.param()
+      console.log(consult_data);
       jQuery.ajax({
         type: 'GET',
-        url: "http://localhost/001BusinessSunhouse/wp-json/alo/consult_all/",
+        url: `${alo_localize_script.rest_url}/consult_all/`,
         data: consult_data,
         success: function nd_booking_sorting_result(nd_booking_sorting_result) {
           document.querySelectorAll('.alocard__list').forEach((item) => {
@@ -191,7 +196,7 @@ jQuery(document).ready(function () {
               let similar_rooms_html = "";
             !(nd_booking_sorting_result.data === "")
               ? nd_booking_sorting_result.data.forEach(
-                  (item) => (similar_rooms_html += similar_rooms(item))
+                  (item) => (similar_rooms_html += similar_rooms(item, consult_data))
                 )
               : "";
               
@@ -256,7 +261,6 @@ jQuery(document).ready(function () {
       // //END
     }
     // END function
-
     let actualUrl = (window.location.href)? window.location.href: document.URL; 
     let mounthNamesShort = [
       "Ene",
@@ -277,22 +281,34 @@ jQuery(document).ready(function () {
       let day = new Date(paramsActualUrl.nd_booking_archive_form_date_range_from[0]);
       let end_date_value = new Date(paramsActualUrl.nd_booking_archive_form_date_range_to[0]);
 
-      document.querySelector("#nd_booking_date_number_from_front").innerHTML = ((day.getDate()) > 10)? day.getDate(): '0' + day.getDate();
-      document.querySelector("#nd_booking_date_number_to_front").innerHTML = ((end_date_value.getDate()) > 10)? end_date_value.getDate() : '0' + end_date_value.getDate();
+      let nights = end_date_value.getTime() - day.getTime();
+      nights = new Date(nights).getDate();
+
+      $(".nd_booking_nights_number").text(nights);
+
+      document.querySelector("#nd_booking_date_number_from_front").innerHTML = ((day.getDate())+1 >= 10)? day.getDate(): '0' + day.getDate();
+      document.querySelector("#nd_booking_date_number_to_front").innerHTML = ((end_date_value.getDate()) + 1 >= 10)? end_date_value.getDate(): '0' + end_date_value.getDate() ;
       
+
       document.querySelector("#nd_booking_date_month_from_front").innerHTML = mounthNamesShort[day.getMonth()];
       document.querySelector("#nd_booking_date_month_to_front").innerHTML = mounthNamesShort[end_date_value.getMonth()];
+
+      document.querySelector("#nd_booking_archive_form_date_range_from").value = paramsActualUrl.nd_booking_archive_form_date_range_from[0];
+      document.querySelector("#nd_booking_archive_form_date_range_to").value = paramsActualUrl.nd_booking_archive_form_date_range_to[0];
+
       if (paramsActualUrl.nd_booking_archive_form_guests[0]){
         document.querySelector(".nd_booking_guests_number").innerHTML= paramsActualUrl.nd_booking_archive_form_guests[0];
         document.querySelector("#nd_booking_archive_form_guests").value = paramsActualUrl.nd_booking_archive_form_guests[0];
-      } 
+      }
+
 
       setTimeout(() => {
         document.querySelector("#nd_booking_archive_form_date_range_from").value = paramsActualUrl.nd_booking_archive_form_date_range_from[0];
         document.querySelector("#nd_booking_archive_form_date_range_to").value = paramsActualUrl.nd_booking_archive_form_date_range_to[0];
+        nd_booking_get_nights();
         nd_booking_sorting(1);
       }, 1000)
-  }
+    }
     // let date = new Date();
     // let today = date.getDate();
     // let mounthNames = [
@@ -389,8 +405,8 @@ jQuery(document).ready(function () {
         "Dic",
       ],
       dayNamesMin: ["DOM", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB"],
-      nextText: "SIG",
-      prevText: "ANT",
+      nextText: ">>",
+      prevText: "<<",
       changeMonth: false,
       numberOfMonths: 1,
       onClose: function () {
@@ -468,8 +484,8 @@ jQuery(document).ready(function () {
         "Dic",
       ],
       dayNamesMin: ["DOM", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB"],
-      nextText: "SIG",
-      prevText: "ANT",
+      nextText: ">>",
+      prevText: "<<",
       changeMonth: false,
       firstDay: 0,
       dateFormat: "mm/dd/yy",
