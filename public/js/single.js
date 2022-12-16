@@ -87,12 +87,29 @@ jQuery(document).ready(function () {
         url: `${alo_localize_script.rest_url}/single/`,
         data: consult_data,
         success: function nd_booking_sorting_result(nd_booking_sorting_result) {
+          document.querySelectorAll('.alocard__list').forEach((item) => {
+            item.innerHTML= '';
+          });
+
           console.log(consult_data);
           console.log(nd_booking_sorting_result.message);
-          $('#p23_message').append(nd_booking_sorting_result.message)
+          
+          let response = `<div class="alocard__list elementor-column elementor-col-100 elementor-top-column nd_booking_archive_search_masonry_container" data-id="4fa7db83" data-element_type="column">${nd_booking_sorting_result.message}</div>`;
+          
+          $('#p23_message').append(response);
+
+          
+
+          jQuery('#p23_loader').css('display', 'none');
+          (nd_booking_sorting_result.data)? $('#nd_booking_submit').css('display', 'block') : $('#nd_booking_submit').css('display', 'none');
+     
         },
         beforeSend: function(){
-          document.querySelector('#p23_message').innerHTML = "";
+          document.querySelectorAll('.alocard__list').forEach((item) => {
+            item.innerHTML= '';
+          })        
+
+          jQuery('#p23_loader').css('display', 'flex');   
         }
       });
       $('#p23_message').append(consult_data)

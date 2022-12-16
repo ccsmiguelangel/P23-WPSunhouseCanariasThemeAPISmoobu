@@ -19,7 +19,7 @@ function p23_consult_single_data_to_show_callback($res){
 
 
   $resp = p23_get_smoobu_from_date($res['start_date'], $res['end_date']);
-  if (empty($resp)) return p23_error_response(2, http_response_code());
+  if (empty($resp)) return p23_single_error_response(2, http_response_code());
  
   $wp_apartments = p23_get_wp_apartments();
   if (empty($wp_apartments)) return p23_single_error_response(3, http_response_code());
@@ -35,8 +35,6 @@ function p23_consult_single_data_to_show_callback($res){
 
   $resp = p23_get_metabox_guest_data_from_ids($resp, intval($res['guests']));
   if ($resp['err']) return p23_single_error_response($resp['errNum'], http_response_code());
-
-
 
   return p23_single_validated_response($resp, http_response_code());  
 }

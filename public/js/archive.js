@@ -209,12 +209,12 @@ jQuery(document).ready(function () {
               jQuery('#p23_loader').css('display', 'none');
           },
           beforeSend: function(){
-          jQuery('#p23_loader').css('display', 'flex');
-          document.querySelectorAll('.alocard__list').forEach((item) => {
-            item.innerHTML= '';
-          })        
-        }
-      });
+            jQuery('#p23_loader').css('display', 'flex');
+            document.querySelectorAll('.alocard__list').forEach((item) => {
+              item.innerHTML= '';
+            })        
+          }
+       });
 
       
       // START post method
