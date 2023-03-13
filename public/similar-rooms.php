@@ -7,7 +7,8 @@ function generate_similar_room(
   $url,
   $description,
   $max_people,
-  $srcset_image
+  $srcset_image,
+  $woo_id
 ) {
   // Validations
   if (!is_singular('alojamiento')) {
@@ -32,6 +33,9 @@ function generate_similar_room(
     return;
   }
   if (empty($srcset_image)) {
+    return;
+  }
+  if (empty($woo_id)) {
     return;
   }
 

@@ -21,7 +21,8 @@ function p23_validate_smoobu_from_price($res, $obtained_price, $only_smoobu_ids 
   return $resp;
 }
 
-function p23_get_smoobu_from_price($start_date, $end_date, $obtained_price) {
+function p23_get_smoobu_from_price($start_date, $end_date, $obtained_price, $only_smoobu_ids = true) {
+ 
   $obtained_price = intval($obtained_price);
   $curl = curl_init('https://login.smoobu.com/booking/checkApartmentAvailability');
   curl_setopt($curl, CURLOPT_POST, true);
@@ -41,7 +42,7 @@ function p23_get_smoobu_from_price($start_date, $end_date, $obtained_price) {
   $resp = curl_exec($curl);
   $resp = json_decode($resp);
   curl_close($curl);
+  $resp = p23_validate_smoobu_from_price($resp, $obtained_price, $only_smoobu_ids);
   
-  $resp = p23_validate_smoobu_from_price($resp, $obtained_price);
   return $resp;
 }

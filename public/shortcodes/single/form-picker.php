@@ -3,12 +3,17 @@
 
 function p23_form_picker_single()
 {
+
+  $post_id = get_the_ID();
+  $meta_description = get_post_meta($post_id, '_alojamiento_woo_id', true);
+  // $product_url = apply_filters( 'woocommerce_product_permalink', get_permalink( $meta_description ) );
+  $product_url = wc_get_checkout_url(). '?add-to-cart=' . $meta_description;
   ob_start();
 ?>
 
 <!--max night range-->
 
-<form id="nd_booking_single_cpt_1_calendar">
+<form id="nd_booking_single_cpt_1_calendar" action="<?php echo $product_url; ?>">
   <div
     id="nd_booking_search_main_bg"
     class="nd_booking_section nd_booking_bg_greydark nd_booking_padding_15 nd_booking_padding_0_responsive nd_booking_box_sizing_border_box"
@@ -256,7 +261,7 @@ function p23_form_picker_single()
     <!--night info-->
     <div id="nd_booking_single_cpt_1_calendar_btn" class="nd_booking_width_100_percentage nd_booking_float_left nd_booking_padding_15 nd_booking_padding_0_all_iphone nd_booking_padding_top_0 nd_booking_box_sizing_border_box">
       <div class="nd_booking_section nd_booking_height_15 nd_booking_display_none_all_iphone"></div>
-      <input id="nd_booking_submit" class="nd_options_color_white nd_booking_width_100_percentage nd_booking_padding_15_30_important nd_options_second_font_important nd_booking_border_radius_0_important nd_booking_bg_yellow nd_booking_cursor_pointer nd_booking_display_inline_block nd_booking_font_size_11 nd_booking_font_weight_bold nd_booking_letter_spacing_2" type="submit" value="BOOK NOW">
+      <input id="nd_booking_submit" style="display: none;" class="nd_options_color_white nd_booking_width_100_percentage nd_booking_padding_15_30_important nd_options_second_font_important nd_booking_border_radius_0_important nd_booking_bg_yellow nd_booking_cursor_pointer nd_booking_display_inline_block nd_booking_font_size_11 nd_booking_font_weight_bold nd_booking_letter_spacing_2" type="submit" value="BOOK NOW">
     </div>
   </div>
   <div id="p23_message"></div>

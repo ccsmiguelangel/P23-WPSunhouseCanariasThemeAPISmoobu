@@ -74,12 +74,14 @@ jQuery(document).ready(function () {
 
       let date_range_form = p23_changeDateFormat(nd_booking_archive_form_date_range_from,"yyyy-MM-dd");
       let date_range_to =   p23_changeDateFormat(nd_booking_archive_form_date_range_to,"yyyy-MM-dd");
+      let paramsActualUrl = parseURLParams(actualUrl);
 
       let consult_data = {
         start_date: date_range_form,
         end_date: date_range_to,
         guests: nd_booking_archive_form_guests,
-        post_id: alo_localize_script.post_id
+        post_id: alo_localize_script.post_id,
+        price: paramsActualUrl.nd_booking_archive_form_price[0]
       }; 
       jQuery.param()
       jQuery.ajax({
@@ -92,13 +94,11 @@ jQuery(document).ready(function () {
           });
 
           console.log(consult_data);
-          console.log(nd_booking_sorting_result.message);
+          console.log(nd_booking_sorting_result);
           
           let response = `<div class="alocard__list elementor-column elementor-col-100 elementor-top-column nd_booking_archive_search_masonry_container" data-id="4fa7db83" data-element_type="column">${nd_booking_sorting_result.message}</div>`;
           
           $('#p23_message').append(response);
-
-          
 
           jQuery('#p23_loader').css('display', 'none');
           (nd_booking_sorting_result.data)? $('#nd_booking_submit').css('display', 'block') : $('#nd_booking_submit').css('display', 'none');
@@ -107,7 +107,7 @@ jQuery(document).ready(function () {
         beforeSend: function(){
           document.querySelectorAll('.alocard__list').forEach((item) => {
             item.innerHTML= '';
-          })        
+          })
 
           jQuery('#p23_loader').css('display', 'flex');   
         }
@@ -115,6 +115,12 @@ jQuery(document).ready(function () {
       $('#p23_message').append(consult_data)
     }
     // END function
+
+    // break
+
+    let button = document.querySelector('#nd_booking_submit');
+    document.addEventListener('click', ()=> );
+
 
     // break
     

@@ -53,7 +53,7 @@ foreach($meta_description as $id) {
   $description = get_post_meta($id, '_alojamiento_subtitle', true);
   $max_people = get_post_meta($id, '_alojamiento_max_people', true);
   $srcset_image = wp_get_attachment_image_srcset(get_post_thumbnail_id($id));
-
+  $woo_id = get_post_meta($id, '_alojamiento_woo_id', true);
   echo generate_similar_room(
     $image, 
     $title, 
@@ -61,7 +61,8 @@ foreach($meta_description as $id) {
     $url, 
     $description, 
     $max_people, 
-    $srcset_image
+    $srcset_image,
+    $woo_id
   );
 }
 ?>

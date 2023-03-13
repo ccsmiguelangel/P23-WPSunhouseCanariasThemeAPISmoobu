@@ -57,7 +57,7 @@ function p23_single_validated_response($data, $response_code){
 
   $res = (object) array(
     'code' => $response_code,
-    'data' => true,
+    'data' => $data,
     'message' => 'Día disponible.'
   );
 

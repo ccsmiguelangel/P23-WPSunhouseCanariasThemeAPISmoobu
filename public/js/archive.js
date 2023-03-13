@@ -90,7 +90,7 @@ jQuery(document).ready(function () {
               </div>
 
               <div class="alocard__action">
-                <a class="alocard__btn" href="${res.url}?nd_booking_archive_form_date_range_from=${start_date}&nd_booking_archive_form_date_range_to=${end_date}&nd_booking_archive_form_guests=${consult_data.guests}">SABER MÁS</a>
+                <a class="alocard__btn" href="${res.url}?nd_booking_archive_form_date_range_from=${start_date}&nd_booking_archive_form_date_range_to=${end_date}&nd_booking_archive_form_guests=${consult_data.guests}&nd_booking_archive_form_price=${consult_data.price}">SABER MÁS</a>
               </div>
             </div>
           </div>

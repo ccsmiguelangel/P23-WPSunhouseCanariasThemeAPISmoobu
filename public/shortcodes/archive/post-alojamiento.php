@@ -7,7 +7,8 @@ function generate_post_alojamiento(
   $url,
   $description,
   $max_people,
-  $srcset_image
+  $srcset_image,
+  $woo_id
 ) {
   // Validations
   if (!is_post_type_archive('alojamiento')) {
@@ -34,7 +35,9 @@ function generate_post_alojamiento(
   if (empty($srcset_image)) {
     return;
   }
-
+  if (empty($woo_id)) {
+    return;
+  }
 
 
   ob_start();
@@ -113,6 +116,7 @@ function show_all_alo()
     $description = get_post_meta($id, '_alojamiento_subtitle', true);
     $max_people = get_post_meta($id, '_alojamiento_max_people', true);
     $srcset_image = wp_get_attachment_image_srcset(get_post_thumbnail_id($id));
+    $woo_id = get_post_meta($id, '_alojamiento_woo_id', true);
 
     echo generate_post_alojamiento(
       $image,
@@ -121,7 +125,8 @@ function show_all_alo()
       $url,
       $description,
       $max_people,
-      $srcset_image
+      $srcset_image,
+      $woo_id
     );
   }
   ?>
