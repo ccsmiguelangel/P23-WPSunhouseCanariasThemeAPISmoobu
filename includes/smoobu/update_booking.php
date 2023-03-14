@@ -1,6 +1,6 @@
 <?php
-// validation_messages data json says errors 
-function p23_update_booking(
+
+function p23_update_init_booking(
   $reservationId,
   $guestName,
   $guestEmail,
@@ -12,8 +12,7 @@ function p23_update_booking(
 
   $url = 'https://login.smoobu.com/api/reservations/' . $reservationId;
   $curl = curl_init($url);
-  curl_setopt($curl, CURLOPT_POSTFIELDS, true);
-  curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+  curl_setopt($curl, CURLOPT_POST, true);
   curl_setopt($curl, CURLOPT_HTTPHEADER, array(
     'Api-Key:wIoa-r~N3VzVjAiP7t_hCh.Tr2D3R4Ib',
     'cache-control:no-cache',

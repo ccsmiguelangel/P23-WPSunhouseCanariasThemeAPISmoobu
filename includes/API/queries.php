@@ -56,5 +56,9 @@
 @require get_stylesheet_directory().'/includes/API/create_booking.php';
 
   // Update
-@require get_stylesheet_directory().'/includes/smoobu/update_booking.php';
-@require get_stylesheet_directory().'/includes/API/update_booking.php';
+  @require get_stylesheet_directory().'/includes/smoobu/update_booking.php';
+  @require get_stylesheet_directory().'/includes/API/update_booking.php';
+
+  // Cancel Reservation
+@require get_stylesheet_directory().'/includes/smoobu/cancel_reservation.php';
+@require get_stylesheet_directory().'/includes/API/cancel_reservation.php';
