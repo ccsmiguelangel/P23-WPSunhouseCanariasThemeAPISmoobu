@@ -23,6 +23,7 @@
       "lastName" => $lastName,
       "email" => $email,
       "phone" => $phone,
+      "adults" => $adults,
       "depositStatus" => 0,
     ));
     curl_setopt($curl, CURLOPT_POSTFIELDS, $json_data);

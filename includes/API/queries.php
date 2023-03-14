@@ -5,7 +5,6 @@
 @require get_stylesheet_directory().'/includes/API/validations.php';
 @require get_stylesheet_directory().'/includes/API/responses.php';
 @require get_stylesheet_directory().'/includes/compare.php';
-@require get_stylesheet_directory().'/includes/smoobu/create_booking.php';
 // TEST
 @require get_stylesheet_directory().'/includes/wordpress/smoobu_id_to_post_id.php';
 @require get_stylesheet_directory().'/includes/wordpress/services_zones.php';
@@ -51,5 +50,11 @@
 @require get_stylesheet_directory().'/includes/API/single_responses.php';
 @require get_stylesheet_directory().'/includes/API/single_wp.php';
 
-
+// BOOKING
+  // Create booking
+@require get_stylesheet_directory().'/includes/smoobu/create_booking.php';
 @require get_stylesheet_directory().'/includes/API/create_booking.php';
+
+  // Update
+@require get_stylesheet_directory().'/includes/smoobu/update_booking.php';
+@require get_stylesheet_directory().'/includes/API/update_booking.php';
