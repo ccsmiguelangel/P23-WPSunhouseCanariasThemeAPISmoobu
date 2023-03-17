@@ -1,10 +1,6 @@
 <?php
 
-  function p23_create_init_booking($arrivalDate, $depatureDate, $appartemntId, $adults){
-    $fistName = 'webrecerved';
-    $lastName = 'webrecerved';
-    $email = 'webrecerved';
-    $phone = 'webrecerved';
+  function p23_create_init_booking($arrivalDate, $depatureDate, $appartemntId, $adults, $price){
 
     $curl = curl_init('https://login.smoobu.com/api/reservations');
     curl_setopt($curl, CURLOPT_POST, true);
@@ -17,15 +13,14 @@
     $json_data = json_encode(array(
       'arrivalDate' => $arrivalDate,
       'departureDate' => $depatureDate,
-      // "channelId" => 63,
       "apartmentId" => $appartemntId,
-      "firstName" => $fistName,
-      "lastName" => $lastName,
-      "email" => $email,
-      "phone" => $phone,
       "adults" => $adults,
+      "price" => $price,
+      "deposit" => 0,	
       "depositStatus" => 0,
+      "notice" => "Cleaning charge added to the price."
     ));
+    
     curl_setopt($curl, CURLOPT_POSTFIELDS, $json_data);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($curl);
