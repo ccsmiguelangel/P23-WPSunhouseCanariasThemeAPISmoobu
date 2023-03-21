@@ -11,6 +11,9 @@
     ));
 
     $json_data = json_encode(array(
+      'firstName' => '15min Booked on the web',
+      'lastName' => '15min Booked on the web',
+      'email' => 'info@sunhousescanarias.com',
       'arrivalDate' => $arrivalDate,
       'departureDate' => $depatureDate,
       "apartmentId" => $appartemntId,

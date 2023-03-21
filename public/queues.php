@@ -37,9 +37,22 @@ function p23_script_single_alojamiento_queue(){
   wp_register_script('p23_single_js', get_stylesheet_directory_uri().'/public/js/single.js', array('jquery', 'jQuery_ui_archive'), '6.0.3', true);
   wp_enqueue_script('p23_single_js');
   
+
+  $woo_id = get_post_meta(get_the_ID(), '_alojamiento_woo_id', true);
+  $checkout_url = wc_get_checkout_url() . '?add-to-cart=' . $woo_id;
+
   wp_localize_script('p23_single_js', 'alo_localize_script', array(
     "rest_url" => rest_url('alo'),
-    "post_id" =>  get_the_ID()
+    "post_id" =>  get_the_ID(),
+    "woo_url" => $checkout_url,
   ));
 }
 add_action("wp_enqueue_scripts","p23_script_single_alojamiento_queue");
+
+
+// NOT WOEK
+add_action( 'init', 'cartflows_update_price_from_url' );
+function cartflows_update_price_from_url() {
+  $price = $_GET['price'];
+  update_option( 'cartflows_gateway_price', $price );
+}

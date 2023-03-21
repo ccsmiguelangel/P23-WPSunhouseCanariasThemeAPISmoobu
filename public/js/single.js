@@ -49,7 +49,9 @@ jQuery(document).ready(function () {
     }
     
     //START function
-    
+    let consult_data;
+    let response_data;
+    let booking_id;
     function nd_booking_sorting(paged) {
 
       // var nd_booking_sorting_result_loader = jQuery(
@@ -76,7 +78,7 @@ jQuery(document).ready(function () {
       let date_range_to =   p23_changeDateFormat(nd_booking_archive_form_date_range_to,"yyyy-MM-dd");
       let paramsActualUrl = parseURLParams(actualUrl);
 
-      let consult_data = {
+      consult_data = {
         start_date: date_range_form,
         end_date: date_range_to,
         guests: nd_booking_archive_form_guests,
@@ -93,8 +95,7 @@ jQuery(document).ready(function () {
             item.innerHTML= '';
           });
 
-          console.log(consult_data);
-          console.log(nd_booking_sorting_result);
+          response_data = nd_booking_sorting_result;
           
           let response = `<div class="alocard__list elementor-column elementor-col-100 elementor-top-column nd_booking_archive_search_masonry_container" data-id="4fa7db83" data-element_type="column">${nd_booking_sorting_result.message}</div>`;
           
@@ -112,14 +113,46 @@ jQuery(document).ready(function () {
           jQuery('#p23_loader').css('display', 'flex');   
         }
       });
-      $('#p23_message').append(consult_data)
+      $('#p23_message').append(consult_data);
     }
     // END function
 
     // break
 
-    let button = document.querySelector('#nd_booking_submit');
-    document.addEventListener('click', ()=> );
+    let booking_submit = document.querySelector('#nd_booking_submit');
+    let booking_section = document.querySelector('#nd_booking_single_cpt_1_calendar_btn')
+    booking_submit.addEventListener('click', (e)=> {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // console.log('Le diste click negro');
+      // start_date, end_date, guests, post_id, max_price(price)
+      console.log(consult_data); 
+
+      // data.clening_charge, data.price, data.smoobu_id, 
+      // data.total, data.woo_id wp_id
+      console.log(response_data);
+
+      let booking_data = {
+        'arrivalDate': consult_data.start_date,
+        'depatureDate': consult_data.end_date,
+        'appartemntId': response_data.data.smoobu_id,
+        'price': response_data.data.total,
+        'adults': consult_data.guests,
+      }
+      jQuery.ajax({
+        type: 'GET',
+        url: `${alo_localize_script.rest_url}/create_booking/`,
+        data: booking_data,
+        success: function result(res) {
+          console.log(res);
+          booking_section.innerHTML = "";
+          booking_id = res.id;
+        },
+      }).done(() => {
+        window.location.href = `${alo_localize_script.woo_url}&?booking_id=${booking_id}&price=${response_data.data.total}`;
+      });
+    });
 
 
     // break
