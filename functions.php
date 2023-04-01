@@ -13,3 +13,6 @@
 
 // Public Queues
 @require_once get_stylesheet_directory().'/public/queues.php';
+
+// Public woocommerce
+@require_once get_stylesheet_directory().'/woocommerce.php';

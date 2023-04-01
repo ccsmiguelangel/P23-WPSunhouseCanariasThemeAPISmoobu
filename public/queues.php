@@ -51,8 +51,9 @@ add_action("wp_enqueue_scripts","p23_script_single_alojamiento_queue");
 
 
 // NOT WOEK
-add_action( 'init', 'cartflows_update_price_from_url' );
-function cartflows_update_price_from_url() {
-  $price = $_GET['price'];
-  update_option( 'cartflows_gateway_price', $price );
-}
+// add_action( 'woocommerce_before_checkout_form', 'cartflows_update_price_from_url' );
+// add_action( 'init', 'cartflows_update_price_from_url' );
+// function cartflows_update_price_from_url() {
+//   $price = $_GET['price'];
+//   update_option( 'cartflows_gateway_price', $price );
+// }

@@ -183,7 +183,7 @@ jQuery(document).ready(function () {
       $(".nd_booking_nights_number").text(nights);
       
       document.querySelector("#nd_booking_date_number_from_front").innerHTML = ((day.getDate()+1) >= 10)? day.getDate(): '0' + day.getDate();
-      document.querySelector("#nd_booking_date_number_to_front").innerHTML = ((end_date_value.getDate()+1) >= 10)? end_date_value.getDate(): '0' + end_date_value.getDate();
+      document.querySelector("#nd_booking_date_number_to_front").innerHTML = ((end_date_value.getDate()) + 1 > 10)? end_date_value.getDate(): '0' + end_date_value.getDate();
       
       document.querySelector("#nd_booking_date_month_from_front").innerHTML = mounthNamesShort[day.getMonth()];
       document.querySelector("#nd_booking_date_month_to_front").innerHTML = mounthNamesShort[end_date_value.getMonth()];
