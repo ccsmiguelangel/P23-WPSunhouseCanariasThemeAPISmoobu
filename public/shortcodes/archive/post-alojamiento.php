@@ -8,36 +8,22 @@ function generate_post_alojamiento(
   $description,
   $max_people,
   $srcset_image,
-  $woo_id
+  $woo_id,
+  $smoobu_id,
+  $slide_shortcode
 ) {
   // Validations
-  if (!is_post_type_archive('alojamiento')) {
-    return;
-  }
-  if (empty($image)) {
-    return;
-  }
-  if (empty($title)) {
-    return;
-  }
-  if (empty($zona)) {
-    return;
-  }
-  if (empty($url)) {
-    return;
-  }
-  if (empty($description)) {
-    return;
-  }
-  if (empty($max_people)) {
-    return;
-  }
-  if (empty($srcset_image)) {
-    return;
-  }
-  if (empty($woo_id)) {
-    return;
-  }
+  if (!is_singular('alojamiento')) return;
+  if (empty($image)) return;
+  if (empty($title)) return;
+  if (empty($zona)) return;
+  if (empty($url)) return;
+  if (empty($description)) return;
+  if (empty($max_people)) return;
+  if (empty($srcset_image)) return;
+  if (empty($woo_id)) return;
+  if (empty($smoobu_id)) return;
+  if (empty($slide_shortcode)) return;
 
 
   ob_start();
@@ -117,6 +103,8 @@ function show_all_alo()
     $max_people = get_post_meta($id, '_alojamiento_max_people', true);
     $srcset_image = wp_get_attachment_image_srcset(get_post_thumbnail_id($id));
     $woo_id = get_post_meta($id, '_alojamiento_woo_id', true);
+    $smoobu_id = get_post_meta($id, '_alojamiento_smoobu_id', true);
+    $slide_shortcode = get_post_meta($id, '_alojamiento_slide_shortcode', true);
 
     echo generate_post_alojamiento(
       $image,
@@ -126,7 +114,9 @@ function show_all_alo()
       $description,
       $max_people,
       $srcset_image,
-      $woo_id
+      $woo_id,
+      $smoobu_id,
+      $slide_shortcode
     );
   }
   ?>

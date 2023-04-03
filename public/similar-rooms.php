@@ -8,36 +8,22 @@ function generate_similar_room(
   $description,
   $max_people,
   $srcset_image,
-  $woo_id
+  $woo_id,
+  $smoobu_id,
+  $slide_shortcode
 ) {
   // Validations
-  if (!is_singular('alojamiento')) {
-    return;
-  }
-  if (empty($image)) {
-    return;
-  }
-  if (empty($title)) {
-    return;
-  }
-  if (empty($zona)) {
-    return;
-  }
-  if (empty($url)) {
-    return;
-  }
-  if (empty($description)) {
-    return;
-  }
-  if (empty($max_people)) {
-    return;
-  }
-  if (empty($srcset_image)) {
-    return;
-  }
-  if (empty($woo_id)) {
-    return;
-  }
+  if (!is_singular('alojamiento')) return;
+  if (empty($image)) return;
+  if (empty($title)) return;
+  if (empty($zona)) return;
+  if (empty($url)) return;
+  if (empty($description)) return;
+  if (empty($max_people)) return;
+  if (empty($srcset_image)) return;
+  if (empty($woo_id)) return;
+  if (empty($smoobu_id)) return;
+  if (empty($slide_shortcode)) return;
 
 
 
