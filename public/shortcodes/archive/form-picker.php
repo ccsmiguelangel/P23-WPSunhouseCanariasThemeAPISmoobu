@@ -127,7 +127,7 @@ function p23_form_picker_alo()
       <!--night info-->
     </div>
     <div class="nd_booking_section">
-      <h3 style="text-align: center;">Mínimo 5 noches de consulta</h3>
+      <h3 style="text-align: center;">Reserva mínima 5 noches</h3>
     </div>
     <!--max night range-->
     <div id="nd_booking_search_cpt_1_form_night_range" class="nd_booking_width_100_percentage nd_booking_float_left nd_booking_padding_0_15 nd_booking_box_sizing_border_box">

@@ -12,22 +12,22 @@ function p23_single_error_response($value, $response_code)
 
   if($isNum){
     switch ($value) {
-      case 1: $msg = 'Fecha Invalida.'; break;
-      case 2: $msg = 'Tu búsqueda no coincide con las fechas disponibles, verifica el calendario de disponibilidad.'; break;
-      case 3: $msg = 'No poseemos información en la web, consulte con el team de soporte.'; break;
-      case 4: $msg = 'No poseemos información en la web, consulte con el team de soporte.'; break;
-      case 5: $msg = 'No poseemos información en la web, consulte con el team de soporte.'; break;
-      case 6: $msg = 'La información proporcionada en número de huéspedes es errada, consulte con el team de soporte.'; break;
-      case 7: $msg = 'La información proporcionada en número de huéspedes es errada, consulte con el team de soporte.'; break;
-      case 8: $msg = "Tu búsqueda posee un máximo de huéspedes, verifica el número en la descripción."; break;
-      case 9: $msg = "Precio inválido, consulte con el team de soporte"; break;
-      case 10:$msg = "Precio inválido, consulte con el team de soporte."; break;
-      case 11:$msg = "Sin resultados encontrados, consulte con el team de soporte."; break;
-      case 12:$msg = "Servicios inválidos, consulte con el team de soporte."; break;
-      case 13:$msg = "Zonas inválidas, consulte con el team de soporte."; break;
-      case 14:$msg = "Servicios inválidos, consulte con el team de soporte."; break;
-      case 15:$msg = "Zonas inválidas, consulte con el team de soporte."; break;
-      case 16:$msg = "Sin resultados encontrados, consulte con el team de soporte."; break;
+      case 1: $msg = 'Alojamiento no disponible.'; break;
+      case 2: $msg = 'Alojamiento no disponible.'; break;
+      case 3: $msg = 'Alojamiento no disponible.'; break;
+      case 4: $msg = 'Alojamiento no disponible.'; break;
+      case 5: $msg = 'Alojamiento no disponible.'; break;
+      case 6: $msg = 'Alojamiento no disponible.'; break;
+      case 7: $msg = 'Alojamiento no disponible.'; break;
+      case 8: $msg = "Alojamiento no disponible."; break;
+      case 9: $msg = "Alojamiento no disponible."; break;
+      case 10:$msg = "Alojamiento no disponible."; break;
+      case 11:$msg = "Alojamiento no disponible."; break;
+      case 12:$msg = "Alojamiento no disponible."; break;
+      case 13:$msg = "Alojamiento no disponible."; break;
+      case 14:$msg = "Alojamiento no disponible."; break;
+      case 15:$msg = "Alojamiento no disponible."; break;
+      case 16:$msg = "Alojamiento no disponible."; break;
     }
   }
   if($isArray){
@@ -58,7 +58,7 @@ function p23_single_validated_response($data, $response_code){
   $res = (object) array(
     'code' => $response_code,
     'data' => $data,
-    'message' => 'Día disponible.'
+    'message' => 'Alojamiento disponible.'
   );
 
   return $res;

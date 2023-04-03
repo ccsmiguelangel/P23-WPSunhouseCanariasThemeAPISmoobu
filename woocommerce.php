@@ -10,6 +10,7 @@ function add_checkout_product($cart)
   $cart_items = $cart->get_cart();
   $cart_item = reset($cart_items);
   $cart_item['data']->set_price($cart_item['price']);
+  $cart->add_fee('Limpieza del alojamiento', $cart_item['cleaning_charge']);
 }
 add_action('woocommerce_before_calculate_totals', 'add_checkout_product', 1, 1);
 
@@ -19,23 +20,14 @@ add_filter('woocommerce_add_cart_item_data', 'my_custom_add_to_cart', 10, 2);
 
 function my_custom_add_to_cart($cart_item_data, $product_id)
 {
-  // Obtiene los datos personalizados desde la URL
-  $price = isset($_GET['price']) ? floatval($_GET['price']) : 123;
+  $price = isset($_GET['price']) ? floatval($_GET['price']) : 0;
+  $booking_id = isset($_GET['booking_id']) ? intval($_GET['booking_id']) : 0;
+  $cleaning_charge = isset($_GET['cleaning_charge']) ? floatval($_GET['cleaning_charge']) : 0;
 
-  // Si los datos personalizados existen, agrega una clave personalizada al carrito de compras
-  if ($price) {
-    $cart_item_data['price'] = $price;
-  }
-
-  // Si los datos personalizados existen, agrega una clave personalizada al carrito de compras
-  if ($product_id) {
-    $cart_item_data['product_id'] = $product_id;
-  }
-  $booking_id = isset($_GET['booking_id']) ? intval($_GET['booking_id']) : 123;
-  // Si los datos personalizados existen, agrega una clave personalizada al carrito de compras
-  if ($product_id) {
-    $cart_item_data['booking_id'] = $booking_id;
-  }
+  if ($price) $cart_item_data['price'] = $price;
+  if ($product_id) $cart_item_data['product_id'] = $product_id;
+  if ($booking_id) $cart_item_data['booking_id'] = $booking_id;
+  if ($cleaning_charge) $cart_item_data['cleaning_charge'] =  $cleaning_charge;
 
   return $cart_item_data;
 }

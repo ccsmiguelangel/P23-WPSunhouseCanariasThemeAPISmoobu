@@ -91,13 +91,43 @@ jQuery(document).ready(function () {
         url: `${alo_localize_script.rest_url}/single/`,
         data: consult_data,
         success: function nd_booking_sorting_result(nd_booking_sorting_result) {
-          document.querySelectorAll('.alocard__list').forEach((item) => {
-            item.innerHTML= '';
-          });
-
+          document.querySelectorAll('.alocard__list').forEach(item => item.innerHTML= '');
+         
           response_data = nd_booking_sorting_result;
           
-          let response = `<div class="alocard__list elementor-column elementor-col-100 elementor-top-column nd_booking_archive_search_masonry_container" data-id="4fa7db83" data-element_type="column">${nd_booking_sorting_result.message}</div>`;
+          let response = `
+          <div style="display: flex; flex-direction: column; padding: 0 5px;" class="alocard__list elementor-column elementor-col-100 elementor-top-column nd_booking_archive_search_masonry_container" data-id="4fa7db83" data-element_type="column">
+            <div class="alocard__list--message"><h5 style="color: #fff; margin: 5px 0;">${nd_booking_sorting_result.message}</h5></div>          `;
+
+          let can_book = 'Alojamiento disponible.'
+
+          if(nd_booking_sorting_result.message == can_book){
+            response = response + `
+            <div class="alocard__list--table">
+              <table style="width:100%">
+                <tr>
+                  <th>Título</th>
+                  <th>Precio</th>
+                </tr>
+                <tr>
+                  <td>Precio Alojamiento</td>
+                  <td>€${nd_booking_sorting_result.data.price}</td>
+                </tr>
+                <tr>
+                  <td>Precio por Limpieza</td>
+                  <td>€${nd_booking_sorting_result.data.clening_charge}</td>
+                </tr>
+                <tr>
+                  <td><strong>TOTAL</strong></td>
+                  <td>€${nd_booking_sorting_result.data.total}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+            `;
+          } else{
+            response = response + `</div>`
+          }
           
           $('#p23_message').append(response);
 
@@ -106,11 +136,9 @@ jQuery(document).ready(function () {
      
         },
         beforeSend: function(){
-          document.querySelectorAll('.alocard__list').forEach((item) => {
-            item.innerHTML= '';
-          })
+          document.querySelectorAll('.alocard__list').forEach(item => item.innerHTML= '');
 
-          jQuery('#p23_loader').css('display', 'flex');   
+          jQuery('#p23_loader').css('display', 'flex');
         }
       });
       $('#p23_message').append(consult_data);
@@ -125,18 +153,21 @@ jQuery(document).ready(function () {
       e.preventDefault();
       e.stopPropagation();
 
+      booking_section.innerHTML = "";
       // console.log('Le diste click negro');
       // start_date, end_date, guests, post_id, max_price(price)
-      console.log(consult_data); 
+      // console.log(consult_data); 
 
       // data.clening_charge, data.price, data.smoobu_id, 
       // data.total, data.woo_id wp_id
-      console.log(response_data);
+      // console.log(response_data);
 
       let booking_data = {
         'arrivalDate': consult_data.start_date,
         'depatureDate': consult_data.end_date,
         'appartemntId': response_data.data.smoobu_id,
+        // 'price': response_data.data.price,
+        // 'cleaning_charge': response_data.data.clening_charge,
         'price': response_data.data.total,
         'adults': consult_data.guests,
       }
@@ -145,12 +176,15 @@ jQuery(document).ready(function () {
         url: `${alo_localize_script.rest_url}/create_booking/`,
         data: booking_data,
         success: function result(res) {
-          console.log(res);
-          booking_section.innerHTML = "";
           booking_id = res.id;
         },
+        beforeSend: function(){
+          document.querySelectorAll('.alocard__list').forEach(item => item.innerHTML= '');
+
+          jQuery('#p23_loader').css('display', 'flex');
+        }
       }).done(() => {
-        window.location.href = `${alo_localize_script.woo_url}&?booking_id=${booking_id}&price=${response_data.data.total}`;
+        window.location.href = `${alo_localize_script.woo_url}&booking_id=${booking_id}&price=${response_data.data.price}&cleaning_charge=${response_data.data.clening_charge}`;
       });
     });
 
