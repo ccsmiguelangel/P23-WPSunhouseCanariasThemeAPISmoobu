@@ -13,7 +13,7 @@ function generate_post_alojamiento(
   $slide_shortcode
 ) {
   // Validations
-  if (!is_singular('alojamiento')) return;
+  if (!is_archive('alojamiento')) return;
   if (empty($image)) return;
   if (empty($title)) return;
   if (empty($zona)) return;
@@ -75,8 +75,7 @@ function generate_post_alojamiento(
 function show_all_alo()
 {
   ob_start();
-?>
-  <?php
+
   $alojamiento = get_posts([
     'post_type' => 'alojamiento',
     'post_status' => 'publish',

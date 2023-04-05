@@ -49,6 +49,42 @@ function p23_script_single_alojamiento_queue(){
 }
 add_action("wp_enqueue_scripts","p23_script_single_alojamiento_queue");
 
+function p23_script_checkout(){
+  // Validations
+  if (!is_checkout()) return;
+  if (!isset($_GET['booking_id'])) {
+    header("Location: ". get_post_type_archive_link('alojamiento'));
+    exit();
+  };
+  if (!isset($_GET['add-to-cart'])) {
+    header("Location: ". get_post_type_archive_link('alojamiento'));
+    exit();
+  };
+  if (!isset($_GET['cleaning_charge'])) {
+    header("Location: ". get_post_type_archive_link('alojamiento'));
+    exit();
+  }
+  if (!isset($_GET['price'])) {
+    header("Location: ". get_post_type_archive_link('alojamiento'));
+    exit();
+  };
+
+
+
+  wp_register_script('p23_checkout_js', get_stylesheet_directory_uri().'/public/js/checkout.js');
+  wp_enqueue_script('p23_checkout_js');
+
+  wp_localize_script('p23_checkout_js', 'alo_localize_script', array(
+    "booking_id" => intval($_GET['booking_id']),
+    "product_id" => intval($_GET['add-to-cart']),
+    "rest_url" => rest_url('alo'),
+    "book_url" => get_post_type_archive_link('alojamiento'),
+    "price" => floatval($_GET['price']),
+    "cleaning_charge" => floatval($_GET['cleaning_charge']),
+    "total" => (floatval($_GET['cleaning_charge']) + floatval($_GET['price'])),
+  ));
+}
+add_action("wp_enqueue_scripts","p23_script_checkout");
 
 // NOT WOEK
 // add_action( 'woocommerce_before_checkout_form', 'cartflows_update_price_from_url' );

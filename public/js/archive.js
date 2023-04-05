@@ -45,13 +45,25 @@ jQuery(document).ready(function () {
 
       return format;
     }
+    function isValidDate(textDate) {
+      let date = new Date(textDate);
+      return !isNaN(date);
+    }
 
     function similar_rooms(res, consult_data = []) {
 
       let start_date = consult_data.start_date.replace(/-/g, '/');
       let end_date = consult_data.end_date.replace(/-/g, '/');
-      start_date = p23_changeDateFormat(start_date, 'MM%2Fdd%2Fyyyy');
-      end_date =  p23_changeDateFormat(end_date, 'MM%2Fdd%2Fyyyy');
+      if(!isValidDate(start_date)) start_date = false; 
+      if(!isValidDate(end_date)) end_date = false;
+      (start_date) ? start_date = p23_changeDateFormat(start_date, 'MM%2Fdd%2Fyyyy'): '';
+      (end_date) ? end_date =  p23_changeDateFormat(end_date, 'MM%2Fdd%2Fyyyy'): '';
+
+      let get_data = '?';
+      (start_date) ? get_data += `nd_booking_archive_form_date_range_from=${start_date}` : get_data += `nd_booking_archive_form_date_range_from=`;
+      (end_date) ? get_data += `&nd_booking_archive_form_date_range_to=${end_date}` : get_data += `&nd_booking_archive_form_date_range_to`;
+      (!isNaN(consult_data.guests)) ? get_data += `&nd_booking_archive_form_guests=${consult_data.guests}` : get_data += `&nd_booking_archive_form_guests=`;
+      (!isNaN(consult_data.price)) ? get_data += `&nd_booking_archive_form_price=${consult_data.price}` : get_data += `&nd_booking_archive_form_price=`;
 
       let html = `
         <div class="alocard">
@@ -92,7 +104,7 @@ jQuery(document).ready(function () {
               </div>
 
               <div class="alocard__action">
-                <a class="alocard__btn" href="${res.url}?nd_booking_archive_form_date_range_from=${start_date}&nd_booking_archive_form_date_range_to=${end_date}&nd_booking_archive_form_guests=${consult_data.guests}&nd_booking_archive_form_price=${consult_data.price}">SABER MÁS</a>
+                <a class="alocard__btn" href="${res.url}${get_data}">SABER MÁS</a>
               </div>
             </div>
           </div>

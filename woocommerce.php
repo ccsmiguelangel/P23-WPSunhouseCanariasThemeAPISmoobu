@@ -1,5 +1,6 @@
 <?php
 
+add_action('woocommerce_before_calculate_totals', 'add_checkout_product', 1, 1);
 function add_checkout_product($cart)
 {
   if (!is_checkout()) return;
@@ -12,12 +13,10 @@ function add_checkout_product($cart)
   $cart_item['data']->set_price($cart_item['price']);
   $cart->add_fee('Limpieza del alojamiento', $cart_item['cleaning_charge']);
 }
-add_action('woocommerce_before_calculate_totals', 'add_checkout_product', 1, 1);
 
-// Permite datos pasados al checkout
+
+// Get data on checkout
 add_filter('woocommerce_add_cart_item_data', 'my_custom_add_to_cart', 10, 2);
-
-
 function my_custom_add_to_cart($cart_item_data, $product_id)
 {
   $price = isset($_GET['price']) ? floatval($_GET['price']) : 0;
@@ -34,7 +33,7 @@ function my_custom_add_to_cart($cart_item_data, $product_id)
 
 // Last product added only
 add_action('woocommerce_add_to_cart', 'keep_last_cart_item');
-function keep_last_cart_item($cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data)
+function keep_last_cart_item($cart_item_key)
 {
 
   // Get cart
@@ -51,4 +50,49 @@ function keep_last_cart_item($cart_item_key, $product_id, $quantity, $variation_
       }
     }
   }
+}
+
+
+
+add_action( 'woocommerce_payment_complete', 'enviar_informacion_a_api_despues_de_pago_aprobado' );
+
+function enviar_informacion_a_api_despues_de_pago_aprobado( $order_id ) {
+  if (!is_checkout()) return;
+
+  // Obtener información del pedido
+  $order = wc_get_order( $order_id );
+
+  // Obtener los datos del cliente
+  $reservationID = $_GET['booking_id'];
+  $guestName = $order->get_billing_first_name(). ' '. $order->get_billing_last_name();
+  $guestEmail = $order->get_billing_email();
+  $guestPhone = $order->get_billing_phone();
+  $address = $order->get_billing_address_1(). " ". $order->get_billing_address_2(). " ". $order->get_billing_city(). " ".$order->get_billing_state(). " ". $order->get_billing_postcode();
+  $lang = "es";
+
+  // Obtener el precio total del pedido
+  $deposit = $order->get_total();
+  $payload = array( 
+    "reservationID" => $reservationID, 
+    "guestName" => $guestName, 
+    "guestEmail" => $guestEmail, 
+    "guestPhone" => $guestPhone,
+    "deposit" => $deposit,
+    "language" => $lang,
+  );
+
+  $apiUrl = rest_url('alo')."/update_booking/?"."reservationID=".$payload['reservationID']."&guestName=".$payload['guestName']."&guestEmail=".$payload['guestEmail']."&guestPhone=".$payload['guestPhone']."&deposit=".$payload['deposit']."&language=".$payload['language'];
+
+  $response = wp_remote_post( $apiUrl, array(
+    'method' => 'GET',
+  ) );
+
+  // Verificar si la llamada fue exitosa
+  if ( is_wp_error( $response ) ) {
+      error_log( 'Error al enviar información a la API: ' . $response->get_error_message() );
+  } else {
+      // Loguear la respuesta de la API
+      error_log( 'Respuesta de la API: ' . wp_remote_retrieve_body( $response ) );
+  }
+
 }

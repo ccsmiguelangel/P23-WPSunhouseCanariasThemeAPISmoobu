@@ -23,7 +23,6 @@ function p23_update_init_booking(
     "guestName" => $guestName,
     "guestEmail" => $guestEmail,
     "guestPhone" => $guestPhone,
-    "adults" => $adults,
     "deposit" => $deposit,
     "language" => $language,
   ));

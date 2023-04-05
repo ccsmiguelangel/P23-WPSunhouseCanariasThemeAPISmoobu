@@ -13,12 +13,12 @@ function p23_update_booking_init()
 add_action('rest_api_init', 'p23_update_booking_init');
 
 function p23_update_booking_init_callback($res){
-  $resp = p23_update_booking(
+  // $resp = p23_update_booking(
+  $resp = p23_update_init_booking( 
     $res['reservationId'], 
     $res['guestName'], 
     $res['guestEmail'], 
     $res['guestPhone'],
-    $res['adults'],
     $res['deposit'],
     $res['language'],
   );
