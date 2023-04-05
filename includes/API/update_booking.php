@@ -5,7 +5,7 @@ function p23_update_booking_init()
   $namespace = 'alo';
   $route = 'update_booking';
   $args = array(
-    'methods' => 'GET',
+    'methods' => 'POST',
     'callback' => 'p23_update_booking_init_callback'
   );
   register_rest_route($namespace, $route, $args);

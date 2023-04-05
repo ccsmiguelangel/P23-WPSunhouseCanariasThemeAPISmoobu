@@ -54,45 +54,36 @@ function keep_last_cart_item($cart_item_key)
 
 
 
-add_action( 'woocommerce_payment_complete', 'enviar_informacion_a_api_despues_de_pago_aprobado' );
+add_action('woocommerce_thankyou', 'my_custom_thankyou_page');
+function my_custom_thankyou_page($order_id)
+{
+  $order = wc_get_order($order_id);
+  $status = $order->get_status();
+  if ($status != 'processing') return;
 
-function enviar_informacion_a_api_despues_de_pago_aprobado( $order_id ) {
-  if (!is_checkout()) return;
-
-  // Obtener información del pedido
-  $order = wc_get_order( $order_id );
-
-  // Obtener los datos del cliente
   $reservationID = $_GET['booking_id'];
-  $guestName = $order->get_billing_first_name(). ' '. $order->get_billing_last_name();
+  $guestName = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
   $guestEmail = $order->get_billing_email();
   $guestPhone = $order->get_billing_phone();
-  $address = $order->get_billing_address_1(). " ". $order->get_billing_address_2(). " ". $order->get_billing_city(). " ".$order->get_billing_state(). " ". $order->get_billing_postcode();
+  $address = $order->get_billing_address_1() . " " . $order->get_billing_address_2() . " " . $order->get_billing_city() . " " . $order->get_billing_state() . " " . $order->get_billing_postcode();
   $lang = "es";
 
-  // Obtener el precio total del pedido
   $deposit = $order->get_total();
-  $payload = array( 
-    "reservationID" => $reservationID, 
-    "guestName" => $guestName, 
-    "guestEmail" => $guestEmail, 
+
+  wp_enqueue_script('p23_thankyou_js', get_stylesheet_directory_uri().'/public/js/thankyou.js', array(), false, true);
+
+  $payload = array(
+    "reservationID" => $reservationID,
+    "guestName" => $guestName,
+    "guestEmail" => $guestEmail,
     "guestPhone" => $guestPhone,
     "deposit" => $deposit,
     "language" => $lang,
   );
 
-  $apiUrl = rest_url('alo')."/update_booking/?"."reservationID=".$payload['reservationID']."&guestName=".$payload['guestName']."&guestEmail=".$payload['guestEmail']."&guestPhone=".$payload['guestPhone']."&deposit=".$payload['deposit']."&language=".$payload['language'];
-
-  $response = wp_remote_post( $apiUrl, array(
-    'method' => 'GET',
-  ) );
-
-  // Verificar si la llamada fue exitosa
-  if ( is_wp_error( $response ) ) {
-      error_log( 'Error al enviar información a la API: ' . $response->get_error_message() );
-  } else {
-      // Loguear la respuesta de la API
-      error_log( 'Respuesta de la API: ' . wp_remote_retrieve_body( $response ) );
-  }
-
+  wp_localize_script('p23_thankyou_js', 'alo_thankyou_data', array(
+    'apiUrl' => rest_url('alo') . "/update_booking/",
+    'thankyouUrl' => $order->get_checkout_order_received_url(),
+    'payload' => $payload
+  ));
 }

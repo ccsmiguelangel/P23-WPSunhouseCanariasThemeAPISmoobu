@@ -51,7 +51,9 @@ add_action("wp_enqueue_scripts","p23_script_single_alojamiento_queue");
 
 function p23_script_checkout(){
   // Validations
-  if (!is_checkout()) return;
+  // if (!function_exists( 'cartflows_is_checkout' ) && !cartflows_is_checkout() ) return;
+  // if(!is_checkout()) return;
+  if(!is_page(5127)) return;
   if (!isset($_GET['booking_id'])) {
     header("Location: ". get_post_type_archive_link('alojamiento'));
     exit();
@@ -84,7 +86,7 @@ function p23_script_checkout(){
     "total" => (floatval($_GET['cleaning_charge']) + floatval($_GET['price'])),
   ));
 }
-add_action("wp_enqueue_scripts","p23_script_checkout");
+add_action("cartflows_checkout_enqueue_scripts","p23_script_checkout");
 
 // NOT WOEK
 // add_action( 'woocommerce_before_checkout_form', 'cartflows_update_price_from_url' );

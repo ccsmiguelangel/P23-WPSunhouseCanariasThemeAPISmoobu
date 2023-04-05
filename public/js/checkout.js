@@ -6,7 +6,7 @@ if(!alo_localize_script.booking_id) window.location.href = homeUrl;
 if(!alo_localize_script.price) window.location.href = homeUrl;
 if(!alo_localize_script.cleaning_charge) window.location.href = homeUrl;
 
-let updateSmoobu = `${alo_localize_script.rest_url}/update_booking/?reservationId=&guestName=&guestEmail=&guestPhone=&deposit=&language=es`
+let updateSmoobu = `${alo_localize_script.rest_url}/update_booking/`
 let cancelSmoobu = `${alo_localize_script.rest_url}/cancel_resevation/?reservationId=${alo_localize_script.booking_id}`  
 
 function fetchToCancelSmoobu(){
@@ -55,7 +55,7 @@ function onFinish() {
 }
 
   // Establecer el temporizador
-let duration = 900000000; // 15 minutos = 900000 milisegundos
+let duration = 60000; // 15 minutos = 900000 milisegundos
 setTimeout(onFinish, duration);
 
   // Función que actualiza el temporizador cada segundo
@@ -70,3 +70,38 @@ setInterval(updateTimer, 1000);
 
 // ENDTIMER
 
+// BEG SEND DATA SMOOBU
+// jQuery(document).ready(function($) {
+//   $('#checkout').submit(function(event) {
+//     // Evitar que el formulario se envíe y recargue la página
+//     event.preventDefault();
+
+//     // Obtener los datos del formulario y convertirlos en un objeto JSON
+//     var formData = {};
+//     $('#checkout').serializeArray().forEach(function(item) {
+//       formData[item.name] = item.value;
+//     });
+
+//     // Realizar una llamada Fetch hacia tu API con los datos del formulario en el cuerpo
+//     fetch('https://tu-api.com/update_booking/', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(formData)
+//     })
+//     .then(function(response) {
+//       // Verificar la respuesta de la API y redirigir al usuario a la página de agradecimiento
+//       if (response.ok) {
+//         window.location.href = 'https://tu-sitio.com/gracias';
+//       } else {
+//         console.log('Error al enviar datos al API');
+//       }
+//     })
+//     .catch(function(error) {
+//       console.log('Error al enviar datos al API: ' + error);
+//     });
+//   });
+// });
+
+// END SEND DATA SMOOBU
