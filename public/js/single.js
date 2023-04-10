@@ -1,7 +1,7 @@
 jQuery(document).ready(function () {
   jQuery(function ($) {
     function parseURLParams(url) {
-      var queryStart = url.indexOf("?") + 1,
+      let queryStart = url.indexOf("?") + 1,
         queryEnd = url.indexOf("#") + 1 || url.length + 1,
         query = url.slice(queryStart, queryEnd - 1),
         pairs = query.replace(/\+/g, " ").split("&"),
@@ -53,7 +53,7 @@ jQuery(document).ready(function () {
     let response_data;
     let booking_id;
     function nd_booking_sorting(paged) {
-      // var nd_booking_sorting_result_loader = jQuery(
+      // let nd_booking_sorting_result_loader = jQuery(
       //   '<div id="nd_booking_sorting_result_loader" class="nd_booking_position_absolute nd_booking_top_0 nd_booking_z_index_9 nd_booking_left_0 nd_booking_bg_white  nd_booking_cursor_progress nd_booking_height_100_percentage nd_booking_width_100_percentage"></div>'
       // ).hide();
       // jQuery("#nd_booking_archive_search_masonry_container").append(
@@ -61,14 +61,14 @@ jQuery(document).ready(function () {
       // );
       // nd_booking_sorting_result_loader.fadeIn("slow");
 
-      //variables passed on function
-      var nd_booking_archive_form_date_range_from = jQuery(
+      //letiables passed on function
+      let nd_booking_archive_form_date_range_from = jQuery(
         "#nd_booking_archive_form_date_range_from"
       ).val();
-      var nd_booking_archive_form_date_range_to = jQuery(
+      let nd_booking_archive_form_date_range_to = jQuery(
         "#nd_booking_archive_form_date_range_to"
       ).val();
-      var nd_booking_archive_form_guests = jQuery(
+      let nd_booking_archive_form_guests = jQuery(
         "#nd_booking_archive_form_guests"
       ).val();
 
@@ -81,14 +81,14 @@ jQuery(document).ready(function () {
         "yyyy-MM-dd"
       );
       let paramsActualUrl = parseURLParams(actualUrl);
-
-      consult_data = {
-        start_date: date_range_form,
-        end_date: date_range_to,
-        guests: nd_booking_archive_form_guests,
-        post_id: alo_localize_script.post_id,
-        price: (paramsActualUrl.nd_booking_archive_form_price[0])?paramsActualUrl.nd_booking_archive_form_price[0]:700,
-      };
+      if (paramsActualUrl){
+        consult_data = {
+          start_date: date_range_form,
+          end_date: date_range_to,
+          guests: nd_booking_archive_form_guests,
+          post_id: alo_localize_script.post_id,
+          price: (paramsActualUrl.nd_booking_archive_form_price[0])?paramsActualUrl.nd_booking_archive_form_price[0]:700,
+        };
       jQuery.param();
       jQuery.ajax({
         type: "GET",
@@ -151,6 +151,7 @@ jQuery(document).ready(function () {
           jQuery("#p23_loader").css("display", "flex");
         },
       });
+      }
       $("#p23_message").append(consult_data);
     }
     // END function
@@ -225,11 +226,13 @@ jQuery(document).ready(function () {
       let date = new Date(textDate);
       return !isNaN(date);
     }
-    function isset(variable) {
-      return typeof variable !== "undefined" && variable !== null;
+    function isset(letiable) {
+      return typeof letiable !== "undefined" && letiable !== null;
     }
     let paramsActualUrl = parseURLParams(actualUrl);
-    if (paramsActualUrl) {
+    if(paramsActualUrl === undefined) paramsActualUrl = 0;
+    console.log(paramsActualUrl)
+    if (paramsActualUrl.length > 2) {
       let day = isset(paramsActualUrl.nd_booking_archive_form_date_range_from)
         ? new Date(paramsActualUrl.nd_booking_archive_form_date_range_from[0])
         : false;
@@ -330,26 +333,26 @@ jQuery(document).ready(function () {
       changeMonth: false,
       numberOfMonths: 1,
       onClose: function () {
-        var minDate = $(this).datepicker("getDate");
-        var newMin = new Date(minDate.setDate(minDate.getDate() + 5));
+        let minDate = $(this).datepicker("getDate");
+        let newMin = new Date(minDate.setDate(minDate.getDate() + 5));
         $("#nd_booking_archive_form_date_range_to").datepicker(
           "option",
           "minDate",
           newMin
         );
 
-        var nd_booking_input_date_from = $(
+        let nd_booking_input_date_from = $(
           "#nd_booking_archive_form_date_range_from"
         ).val();
-        var nd_booking_date_number_from = nd_booking_input_date_from.substring(
+        let nd_booking_date_number_from = nd_booking_input_date_from.substring(
           3,
           5
         );
         $("#nd_booking_date_number_from").val(nd_booking_date_number_from);
-        var nd_booking_input_date_to = $(
+        let nd_booking_input_date_to = $(
           "#nd_booking_archive_form_date_range_to"
         ).val();
-        var nd_booking_date_number_to = nd_booking_input_date_to.substring(
+        let nd_booking_date_number_to = nd_booking_input_date_to.substring(
           3,
           5
         );
@@ -358,11 +361,11 @@ jQuery(document).ready(function () {
         $("#nd_booking_date_number_from_front").text(
           nd_booking_date_number_from
         );
-        var nd_booking_date_month_from = $("#nd_booking_date_month_from").val();
+        let nd_booking_date_month_from = $("#nd_booking_date_month_from").val();
         $("#nd_booking_date_month_from_front").text(nd_booking_date_month_from);
 
         $("#nd_booking_date_number_to_front").text(nd_booking_date_number_to);
-        var nd_booking_date_month_to = $("#nd_booking_date_month_to").val();
+        let nd_booking_date_month_to = $("#nd_booking_date_month_to").val();
         $("#nd_booking_date_month_to_front").text(nd_booking_date_month_to);
 
         nd_booking_get_nights();
@@ -411,18 +414,18 @@ jQuery(document).ready(function () {
       dateFormat: "mm/dd/yy",
       numberOfMonths: 1,
       onClose: function () {
-        var nd_booking_input_date_from = $(
+        let nd_booking_input_date_from = $(
           "#nd_booking_archive_form_date_range_from"
         ).val();
-        var nd_booking_date_number_from = nd_booking_input_date_from.substring(
+        let nd_booking_date_number_from = nd_booking_input_date_from.substring(
           3,
           5
         );
         $("#nd_booking_date_number_from").val(nd_booking_date_number_from);
-        var nd_booking_input_date_to = $(
+        let nd_booking_input_date_to = $(
           "#nd_booking_archive_form_date_range_to"
         ).val();
-        var nd_booking_date_number_to = nd_booking_input_date_to.substring(
+        let nd_booking_date_number_to = nd_booking_input_date_to.substring(
           3,
           5
         );
@@ -431,11 +434,11 @@ jQuery(document).ready(function () {
         $("#nd_booking_date_number_from_front").text(
           nd_booking_date_number_from
         );
-        var nd_booking_date_month_from = $("#nd_booking_date_month_from").val();
+        let nd_booking_date_month_from = $("#nd_booking_date_month_from").val();
         $("#nd_booking_date_month_from_front").text(nd_booking_date_month_from);
 
         $("#nd_booking_date_number_to_front").text(nd_booking_date_number_to);
-        var nd_booking_date_month_to = $("#nd_booking_date_month_to").val();
+        let nd_booking_date_month_to = $("#nd_booking_date_month_to").val();
         $("#nd_booking_date_month_to_front").text(nd_booking_date_month_to);
 
         nd_booking_get_nights();
@@ -448,18 +451,21 @@ jQuery(document).ready(function () {
 
     // break
     function nd_booking_get_nights() {
-      var nd_booking_archive_form_date_range_from = $(
+      let nd_booking_archive_form_date_range_from = $(
         "#nd_booking_archive_form_date_range_from"
       ).val();
-      var nd_booking_archive_form_date_range_to = $(
+      let nd_booking_archive_form_date_range_to = $(
         "#nd_booking_archive_form_date_range_to"
       ).val();
-      var nd_booking_start = new Date(nd_booking_archive_form_date_range_from);
-      var nd_booking_end = new Date(nd_booking_archive_form_date_range_to);
-      var nd_booking_nights_number = Math.round(
+      if(!nd_booking_archive_form_date_range_from) {
+        $(".nd_booking_nights_number").text('-');
+        return;
+      }
+      let nd_booking_start = new Date(nd_booking_archive_form_date_range_from);
+      let nd_booking_end = new Date(nd_booking_archive_form_date_range_to);
+      let nd_booking_nights_number = Math.round(
         (nd_booking_end - nd_booking_start) / 1000 / 60 / 60 / 24
       );
-      $(".nd_booking_nights_number").text(nd_booking_nights_number);
     }
 
     $("#nd_booking_open_calendar_from").click(function () {
@@ -471,7 +477,7 @@ jQuery(document).ready(function () {
 
     // Break
     $(".nd_booking_guests_increase").click(function () {
-      var value = $(".nd_booking_guests_number").text();
+      let value = $(".nd_booking_guests_number").text();
       value++;
       $(".nd_booking_guests_number").text(value);
       $("#nd_booking_archive_form_guests").val(value);
@@ -479,7 +485,7 @@ jQuery(document).ready(function () {
     });
 
     $(".nd_booking_guests_decrease").click(function () {
-      var value = $(".nd_booking_guests_number").text();
+      let value = $(".nd_booking_guests_number").text();
 
       if (value > 1) {
         value--;
