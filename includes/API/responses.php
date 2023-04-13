@@ -70,3 +70,22 @@ function p23_into_error_response($errNum){
   $resp = array('errNum' => $errNum,'err' => true);
   return $resp;
 }
+
+
+function p23_update_booking_err_response($reservationID, $guestName, $guestEmail, $guesPhone, $deposit, $language){
+  $msg = '';
+
+  if(empty($reservationID) || !isset($reservationID)) $msg = 'Reservation ID is invalid';
+  if(empty($guestName) || !isset($guestName)) $msg = 'Guest Name is empty';
+  if(empty($guestEmail) || !isset($guestEmail)) $msg = 'Guest Email is empty';
+  if(empty($guesPhone) || !isset($guesPhone)) $msg = 'Guest Phone is empty';
+  if(empty($deposit) || !isset($deposit)) $msg = 'Desposit is invalid';
+
+  if($msg === '') return true;
+
+  $res = (object) array(
+    'message' => $msg
+  );
+
+  return $res;
+}

@@ -12,17 +12,17 @@ function p23_update_booking_init()
 }
 add_action('rest_api_init', 'p23_update_booking_init');
 
-function p23_update_booking_init_callback($res){
-  // $resp = p23_update_booking(
-  $resp = p23_update_init_booking( 
-    $res['reservationId'], 
-    $res['guestName'], 
-    $res['guestEmail'], 
-    $res['guestPhone'],
-    $res['deposit'],
-    $res['language'],
-  );
+function p23_update_booking_init_callback($res)
+{
 
+  $resp = p23_update_init_booking(
+    $res->get_param('reservationId'),
+    $res->get_param('guestName'),
+    $res->get_param('guestEmail'),
+    $res->get_param('guestPhone'),
+    $res->get_param('deposit'),
+    $res->get_param('language')
+  );
   return $resp;
-// return $res['reservationId'];
+  // return $res['reservationId'];
 }

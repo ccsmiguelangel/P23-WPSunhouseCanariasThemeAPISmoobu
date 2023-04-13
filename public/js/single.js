@@ -1,7 +1,10 @@
 jQuery(document).ready(function () {
   jQuery(function ($) {
+    let consult_data;
+    //START function
+    let response_data;
+    let booking_id;
     onLoadSingleAlo();
-
     function paramURLUndefined(paramsUrl){
       if (!isset(paramsUrl)) return false;
       
@@ -14,10 +17,10 @@ jQuery(document).ready(function () {
       response.nd_booking_archive_form_price = [false];
     }
     function isset(letiable) {
-      if(typeof letiable !== "undefined") return false;
-      if( letiable !== null ) return false;
-      if( letiable !== '' ) return false;
-      if ( letiable !== 0 ) return false;
+      if(typeof letiable === "undefined") return false;
+      if( letiable === null ) return false;
+      if( letiable === '' ) return false;
+      if ( letiable === 0 ) return false;
       return true;
     }
     function isValidDate(textDate) {
@@ -75,9 +78,6 @@ jQuery(document).ready(function () {
       return format;
     }
 
-    //START function
-    let response_data;
-    let booking_id;
 
     function nd_booking_sorting(paged) {
       let actualUrl = window.location.href;
@@ -111,7 +111,7 @@ jQuery(document).ready(function () {
       } else {
         lastPrice = paramsActualUrl.nd_booking_archive_form_price[0];
       }
-      let consult_data = {
+      consult_data = {
         start_date: date_range_form,
         end_date: date_range_to,
         guests: nd_booking_archive_form_guests,

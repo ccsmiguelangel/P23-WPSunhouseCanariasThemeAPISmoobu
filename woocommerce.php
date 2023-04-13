@@ -61,7 +61,6 @@ function my_custom_thankyou_page($order_id)
   $status = $order->get_status();
   if ($status != 'processing') return;
 
-  $reservationID = $_GET['booking_id'];
   $guestName = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
   $guestEmail = $order->get_billing_email();
   $guestPhone = $order->get_billing_phone();
@@ -73,17 +72,34 @@ function my_custom_thankyou_page($order_id)
   wp_enqueue_script('p23_thankyou_js', get_stylesheet_directory_uri().'/public/js/thankyou.js', array(), false, true);
 
   $payload = array(
-    "reservationID" => $reservationID,
     "guestName" => $guestName,
     "guestEmail" => $guestEmail,
     "guestPhone" => $guestPhone,
     "deposit" => $deposit,
     "language" => $lang,
   );
-
   wp_localize_script('p23_thankyou_js', 'alo_thankyou_data', array(
     'apiUrl' => rest_url('alo') . "/update_booking/",
     'thankyouUrl' => $order->get_checkout_order_received_url(),
     'payload' => $payload
   ));
 }
+
+function p23_script_checkout(){
+  if(!is_checkout()) return;
+  wp_register_script('p23_script_checkout_queue', get_stylesheet_directory_uri().'/public/js/checkout.js');
+  wp_enqueue_script("p23_script_checkout_queue");
+
+  wp_localize_script('p23_script_checkout_queue', 'alo_localize_script', array(
+    "booking_id" => intval($_GET['booking_id']),
+    "product_id" => intval($_GET['add-to-cart']),
+    "rest_url" => rest_url('alo'),
+    "book_url" => get_post_type_archive_link('alojamiento'),
+    "price" => floatval($_GET['price']),
+    "cleaning_charge" => floatval($_GET['cleaning_charge']),
+    "total" => (floatval($_GET['cleaning_charge']) + floatval($_GET['price'])),
+  ));
+}
+
+
+add_action("woocommerce_before_calculate_totals","p23_script_checkout");

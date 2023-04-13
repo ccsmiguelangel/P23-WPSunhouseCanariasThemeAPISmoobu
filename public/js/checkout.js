@@ -51,11 +51,12 @@ function onFinish() {
   console.log("Han culminado el tiempo de reserva!");
     // Eliminar la hora almacenada en localStorage cuando el tiempo ha transcurrido
   localStorage.removeItem("startTime");
-  fetchToCancelSmoobu();
+  // fetchToCancelSmoobu();
 }
 
   // Establecer el temporizador
 let duration = 60000; // 15 minutos = 900000 milisegundos
+localStorage.setItem('shopData', JSON.stringify(alo_localize_script));
 setTimeout(onFinish, duration);
 
   // Función que actualiza el temporizador cada segundo
