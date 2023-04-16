@@ -50,12 +50,16 @@ if (storedTime) {
 function onFinish() {
   console.log("Han culminado el tiempo de reserva!");
     // Eliminar la hora almacenada en localStorage cuando el tiempo ha transcurrido
-  localStorage.removeItem("startTime");
-  // fetchToCancelSmoobu();
+    localStorage.removeItem("startTime");
+    localStorage.removeItem('cartflows_checkout_form');
+    localStorage.removeItem('shopData');
+    localStorage.removeItem("now");
+
+    fetchToCancelSmoobu();
 }
 
   // Establecer el temporizador
-let duration = 60000; // 15 minutos = 900000 milisegundos
+let duration = 900000; // 15 minutos = 900000 milisegundos
 localStorage.setItem('shopData', JSON.stringify(alo_localize_script));
 setTimeout(onFinish, duration);
 
@@ -68,41 +72,3 @@ function updateTimer() {
 
   // Establecer el temporizador para que se actualice cada segundo
 setInterval(updateTimer, 1000);
-
-// ENDTIMER
-
-// BEG SEND DATA SMOOBU
-// jQuery(document).ready(function($) {
-//   $('#checkout').submit(function(event) {
-//     // Evitar que el formulario se envíe y recargue la página
-//     event.preventDefault();
-
-//     // Obtener los datos del formulario y convertirlos en un objeto JSON
-//     var formData = {};
-//     $('#checkout').serializeArray().forEach(function(item) {
-//       formData[item.name] = item.value;
-//     });
-
-//     // Realizar una llamada Fetch hacia tu API con los datos del formulario en el cuerpo
-//     fetch('https://tu-api.com/update_booking/', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(formData)
-//     })
-//     .then(function(response) {
-//       // Verificar la respuesta de la API y redirigir al usuario a la página de agradecimiento
-//       if (response.ok) {
-//         window.location.href = 'https://tu-sitio.com/gracias';
-//       } else {
-//         console.log('Error al enviar datos al API');
-//       }
-//     })
-//     .catch(function(error) {
-//       console.log('Error al enviar datos al API: ' + error);
-//     });
-//   });
-// });
-
-// END SEND DATA SMOOBU

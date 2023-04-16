@@ -23,8 +23,10 @@ console.log(payload);
     if (response.ok) {
       // Redirect to thank you page
       console.log(response)
+      localStorage.removeItem("startTime");
       localStorage.removeItem('cartflows_checkout_form');
       localStorage.removeItem('shopData');
+      localStorage.removeItem("now");
     } else {
       console.error('Error sending data to API');
     }

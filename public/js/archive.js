@@ -2,6 +2,7 @@
 
 jQuery(document).ready(function () {
   jQuery(function ($) {
+
     function parseURLParams(url) {
       var queryStart = url.indexOf("?") + 1,
           queryEnd   = url.indexOf("#") + 1 || url.length + 1,
@@ -188,13 +189,15 @@ jQuery(document).ready(function () {
       let number_from_front = document.querySelector('#nd_booking_date_number_from_front').textContent;
       let date_range_form; 
       let date_range_to;  
+      let nights = parseInt(document.querySelector('.nd_booking_nights_number').outerText);
+      let realTotalPrice = nd_booking_archive_form_max_price_for_day * nights;
       (number_from_front === '-')? date_range_form = '-' : date_range_form =  p23_changeDateFormat(nd_booking_archive_form_date_range_from,"yyyy-MM-dd");
       (number_from_front === '-')? date_range_to = '-' : date_range_to =   p23_changeDateFormat(nd_booking_archive_form_date_range_to,"yyyy-MM-dd");
       let consult_data = {
         start_date: date_range_form,
         end_date: date_range_to,
         guests: nd_booking_archive_form_guests,
-        price: nd_booking_archive_form_max_price_for_day,
+        price: realTotalPrice,
         services: nd_booking_archive_form_services,
         zones: nd_booking_archive_form_additional_services,
       }; //jQuery.param()
@@ -204,6 +207,7 @@ jQuery(document).ready(function () {
         url: `${alo_localize_script.rest_url}/consult_all/`,
         data: consult_data,
         success: function nd_booking_sorting_result(nd_booking_sorting_result) {
+          console.log(nd_booking_sorting_result);
           document.querySelectorAll('.alocard__list').forEach((item) => {
             item.innerHTML= '';
           });
@@ -228,51 +232,7 @@ jQuery(document).ready(function () {
               item.innerHTML= '';
             })        
           }
-       });
-
-      
-      // START post method
-      // jQuery.get(
-
-      //   //ajax
-      //   nd_booking_my_vars_sorting.nd_booking_ajaxurl_sorting,
-      //   {
-      //     action : 'nd_booking_sorting_php',
-      //     nd_booking_paged : nd_booking_paged,
-      //     nd_booking_archive_form_branches : nd_booking_archive_form_branches,
-      //     nd_booking_archive_form_date_range_from : nd_booking_archive_form_date_range_from,
-      //     nd_booking_archive_form_date_range_to : nd_booking_archive_form_date_range_to,
-      //     nd_booking_archive_form_guests : nd_booking_archive_form_guests,
-      //     nd_booking_archive_form_max_price_for_day : nd_booking_archive_form_max_price_for_day,
-      //     nd_booking_archive_form_services : nd_booking_archive_form_services,
-      //     nd_booking_archive_form_additional_services : nd_booking_archive_form_additional_services,
-      //     nd_booking_search_filter_options_meta_key : nd_booking_search_filter_options_meta_key,
-      //     nd_booking_search_filter_options_order : nd_booking_search_filter_options_order,
-      //     nd_booking_search_filter_layout : nd_booking_search_filter_layout,
-      //     nd_booking_archive_form_branch_stars : nd_booking_archive_form_branch_stars
-      //   },
-      //   //end ajax
-
-      //   //START success
-      //   function( nd_booking_sorting_result ) {
-
-      //     setTimeout(function(){
-
-      //       jQuery( "#nd_booking_content_result" ).remove();
-      //       jQuery( "#nd_booking_archive_search_masonry_container" ).append(nd_booking_sorting_result);
-
-      //       jQuery( "#nd_booking_sorting_result_loader" ).fadeOut( "slow", function() {
-      //         jQuery( "#nd_booking_sorting_result_loader" ).remove();
-      //         jQuery( "#nd_booking_sorting_result_layer" ).remove();
-      //       });
-
-      //     },10);
-
-      //   }
-      //   //END
-
-      // );
-      // //END
+        });
     }
     // END function
     let actualUrl = (window.location.href)? window.location.href: document.URL; 
@@ -291,10 +251,12 @@ jQuery(document).ready(function () {
       "Dec",
     ];
     let paramsActualUrl = parseURLParams(actualUrl);
+    let slide_range= document.getElementById('slider_range');
     if(paramsActualUrl){
+      slide_range.style.display = 'block';
       let day = new Date(paramsActualUrl.nd_booking_archive_form_date_range_from[0]);
       let end_date_value = new Date(paramsActualUrl.nd_booking_archive_form_date_range_to[0]);
-
+      
       let nights = end_date_value.getTime() - day.getTime();
       nights = new Date(nights).getDate();
 
@@ -323,65 +285,7 @@ jQuery(document).ready(function () {
         nd_booking_sorting(1);
       }, 1000)
     }
-    // let date = new Date();
-    // let today = date.getDate();
-    // let mounthNames = [
-    //   "Enero",
-    //   "Febrero",
-    //   "Marzo",
-    //   "Abril",
-    //   "Mayo",
-    //   "Junio",
-    //   "Julio",
-    //   "Agosto",
-    //   "Septiembre",
-    //   "Octubre",
-    //   "Noviembre",
-    //   "Diciembre",
-    // ];
-    // let mounthNamesShort = [
-    //   "Ene",
-    //   "Feb",
-    //   "Mar",
-    //   "Abr",
-    //   "May",
-    //   "Jun",
-    //   "Jul",
-    //   "Ago",
-    //   "Sep",
-    //   "Oct",
-    //   "Nov",
-    //   "Dec",
-    // ];
-    // let currentMonthNameShort = mounthNamesShort[date.getMonth()];
-    // let nextMonthNameShort = mounthNamesShort[date.getMonth() + 1];
-    // lastDayOfMonth = new Date(
-    //   date.getFullYear(),
-    //   date.getMonth() + 1,
-    //   0
-    // ).getDate();
 
-    // isLastDayOfMonth = today + 5 >= lastDayOfMonth;
-
-    // document.querySelector("#nd_booking_date_number_from_front").innerHTML = (today > 10)? today : '0'+today;
-    // let end_date_value;
-    // if(!isLastDayOfMonth){
-    //   ((today + 5) >= 10)? end_date_value = today + 5: end_date_value = '0'+(today+5) 
-    // } 
-    // document.querySelector("#nd_booking_date_number_to_front").innerHTML = end_date_value;
-
-    // document.querySelector("#nd_booking_date_month_from_front").innerHTML =
-    //   currentMonthNameShort;
-    // document.querySelector("#nd_booking_date_month_to_front").innerHTML =
-    //   !isLastDayOfMonth ? currentMonthNameShort : nextMonthNameShort;
-    // document.querySelector('.nd_booking_nights_number').innerHTML = 5;
-    // document.querySelector("#nd_booking_date_number_from_front").innerHTML = '-';
-    // document.querySelector("#nd_booking_date_month_from_front").innerHTML = '-'
-
-    // document.querySelector("#nd_booking_date_number_to_front").innerHTML = '-';
-    // document.querySelector("#nd_booking_date_month_to_front").innerHTML = '-';
-    // document.querySelector('.nd_booking_nights_number').innerHTML = 5;
-    
       // div
     $("#nd_booking_archive_form_date_range_from").datepicker({
       defaultDate: "+1w",
@@ -458,6 +362,7 @@ jQuery(document).ready(function () {
         $("#nd_booking_date_number_to_front").text(nd_booking_date_number_to);
         var nd_booking_date_month_to = $("#nd_booking_date_month_to").val();
         $("#nd_booking_date_month_to_front").text(nd_booking_date_month_to);
+        slide_range.style.display = 'block';
 
         nd_booking_get_nights();
         nd_booking_sorting(1);
@@ -531,6 +436,7 @@ jQuery(document).ready(function () {
         $("#nd_booking_date_number_to_front").text(nd_booking_date_number_to);
         var nd_booking_date_month_to = $("#nd_booking_date_month_to").val();
         $("#nd_booking_date_month_to_front").text(nd_booking_date_month_to);
+        slide_range.style.display = 'block';
 
         nd_booking_get_nights();
         nd_booking_sorting(1);
@@ -580,6 +486,7 @@ jQuery(document).ready(function () {
         nd_booking_sorting(1);
       }
     });
+    
     // div
     $("#nd_booking_slider_range").slider({
       range: "min",

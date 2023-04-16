@@ -134,7 +134,7 @@ function p23_form_picker_alo()
       <div class="nd_booking_section nd_booking_height_20"></div>
       <div class="nd_booking_section nd_booking_height_2 nd_booking_bg_grey"></div>
 
-      <div class="nd_booking_section nd_booking_position_relative nd_booking_padding_30 nd_booking_padding_30_15_all_iphone nd_booking_box_sizing_border_box">
+      <div id="slider_range"  style="display: none;" class="nd_booking_section nd_booking_position_relative nd_booking_padding_30 nd_booking_padding_30_15_all_iphone nd_booking_box_sizing_border_box">
         <div class="nd_booking_section">
           <h3 class="nd_booking_float_left">Precio Por Noche :</h3>
           <span class="nd_booking_float_right nd_options_first_font nd_options_color_greydark nd_booking_line_height_25 nd_booking_font_size_20">€</span>

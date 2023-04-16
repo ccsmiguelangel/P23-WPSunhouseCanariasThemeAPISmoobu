@@ -321,3 +321,89 @@ function alojamiento_save_meta_box_data_6( $post_id ){
 }
 add_action( 'save_post_alojamiento', 'alojamiento_save_meta_box_data_6' );
 // END 1 - 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// add_action('init', 'alojamiento_to_woocommerce');
+
+// function alojamiento_to_woocommerce() {
+//     // Registrar el custom post type de "alojamiento"
+//     register_post_type('alojamiento', [
+//         'labels' => [
+//             'name' => __('Alojamientos'),
+//             'singular_name' => __('Alojamiento')
+//         ],
+//         'public' => true,
+//         'has_archive' => true,
+//         'supports' => ['title', 'editor', 'thumbnail']
+//     ]);
+
+//     // Acciones para crear y eliminar alojamientos
+//     add_action('save_post_alojamiento', 'crear_producto_woocommerce');
+//     add_action('delete_post', 'eliminar_producto_woocommerce');
+// }
+
+// function crear_producto_woocommerce($post_id) {
+//     // Verificar que el post type sea "alojamiento"
+//     if (get_post_type($post_id) !== 'alojamiento') {
+//         return;
+//     }
+
+//     // Verificar si ya existe un producto de WooCommerce asociado al alojamiento
+//     $alojamiento_woo_id = get_post_meta($post_id, '_alojamiento_woo_id', true);
+//     if ($alojamiento_woo_id) {
+//         return;
+//     }
+
+//     // Crear el producto de WooCommerce
+//     $producto = new WC_Product();
+//     $producto->set_name(get_the_title($post_id));
+//     $producto->set_status('publish');
+//     $producto->set_regular_price(0);
+//     $producto_id = $producto->save();
+
+//     // Guardar el ID del producto en el metabox del alojamiento
+//     update_post_meta($post_id, '_alojamiento_woo_id', $producto_id);
+// }
+
+// function eliminar_producto_woocommerce($post_id) {
+//     // Verificar que el post type sea "alojamiento"
+//     if (get_post_type($post_id) !== 'alojamiento') {
+//         return;
+//     }
+
+//     // Verificar si existe un producto de WooCommerce asociado al alojamiento
+//     $alojamiento_woo_id = get_post_meta($post_id, '_alojamiento_woo_id', true);
+//     if (!$alojamiento_woo_id) {
+//         return;
+//     }
+
+//     // Eliminar el producto de WooCommerce
+//     $producto = wc_get_product($alojamiento_woo_id);
+//     if ($producto) {
+//         $producto->delete(true);
+//     }
+
+//     // Eliminar el meta del ID del producto
+//     delete_post_meta($post_id, '_alojamiento_woo_id');
+// }

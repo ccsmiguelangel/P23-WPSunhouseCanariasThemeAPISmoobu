@@ -106,7 +106,7 @@ jQuery(document).ready(function () {
       let lastPrice;
       
       if(!isset(paramsActualUrl)){
-        lastPrice = 700;
+        lastPrice = 5000000000000;
         paramsActualUrl = paramURLUndefined(paramsActualUrl); 
       } else {
         lastPrice = paramsActualUrl.nd_booking_archive_form_price[0];
