@@ -2647,7 +2647,7 @@ function p23_form_picker()
             lastDayOfMonth = new Date(date.getFullYear(), date.getMonth()+1, 0).getDate();
             
 
-            isLastDayOfMonth = (today+5) >= lastDayOfMonth;
+            isLastDayOfMonth = (today+4) >= lastDayOfMonth;
 
             document.querySelector('#nd_booking_date_number_from_front').innerHTML = today;
             document.querySelector('#nd_booking_date_number_to_front').innerHTML = (!isLastDayOfMonth)? today + 5 : 5 - (lastDayOfMonth - today);

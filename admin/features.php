@@ -14,3 +14,4 @@
 // Build Meta Box Field
 @require_once get_stylesheet_directory().'/admin/alojamiento/build.php';
 
+@require_once get_stylesheet_directory().'/admin/alojamiento/admin-caps.php';

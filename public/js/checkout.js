@@ -1,5 +1,6 @@
 let homeUrl = location.protocol + "//" + location.hostname + location.pathname + "/" + "alojamientos" ;
 //  alo_localize_script data validation
+setTimeout(() => window.history.replaceState({}, document.title, window.location.href.split('?')[0]), 2000)
 
 if(!alo_localize_script.product_id) window.location.href = homeUrl;
 if(!alo_localize_script.booking_id) window.location.href = homeUrl;

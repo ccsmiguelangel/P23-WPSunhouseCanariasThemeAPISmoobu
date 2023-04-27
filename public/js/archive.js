@@ -57,8 +57,8 @@ jQuery(document).ready(function () {
       let end_date = consult_data.end_date.replace(/-/g, '/');
       if(!isValidDate(start_date)) start_date = false; 
       if(!isValidDate(end_date)) end_date = false;
-      (start_date) ? start_date = p23_changeDateFormat(start_date, 'MM%2Fdd%2Fyyyy'): '';
-      (end_date) ? end_date =  p23_changeDateFormat(end_date, 'MM%2Fdd%2Fyyyy'): '';
+      (start_date) ? start_date = p23_changeDateFormat(start_date, 'MM/dd/yyyy'): '';
+      (end_date) ? end_date =  p23_changeDateFormat(end_date, 'MM/dd/yyyy'): '';
 
       let get_data = '?';
       (start_date) ? get_data += `nd_booking_archive_form_date_range_from=${start_date}` : get_data += `nd_booking_archive_form_date_range_from=`;

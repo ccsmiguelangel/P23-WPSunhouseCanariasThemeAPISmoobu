@@ -39,10 +39,8 @@ function remover_menu() {
     remove_menu_page('tools.php');
     remove_menu_page('themes.php');
     remove_menu_page('edit.php');
-    remove_menu_page('edit.php?post_type=elementor_library');
     remove_menu_page('edit-comments.php');
     remove_menu_page('elementor');
-    remove_menu_page('elementor_library.php');
     remove_menu_page('starter-templates.php');
     remove_menu_page('profile.php');
     remove_menu_page('captcha.php');
@@ -52,7 +50,13 @@ function remover_menu() {
     remove_menu_page('wpseo_workouts');
     remove_menu_page('update_core.php');
     remove_menu_page('post-new.php');
-    remove_menu_page('index.php');
+    remove_menu_page('edit.php?post_type=page');
+    remove_menu_page('astra');
+    remove_menu_page('cartflows');
+    remove_menu_page('plugins.php');
+    remove_menu_page('users.php');
+    remove_menu_page('loco');
+    remove_menu_page('wp_file_manager');
   }
 }
 
@@ -60,7 +64,7 @@ function remover_elementos_barra_admin($wp_admin_bar) {
   if( current_user_can('editor') ) {
     ?>
     <style>
-      #wp-admin-bar-root-default{
+      #wp-admin-bar-root-default, #menu-posts-elementor_library, #toplevel_page_woocommerce, #toplevel_page_wc-admin-path--analytics-overview, #toplevel_page_woocommerce-marketing{
         display: none;
       }
     </style>

@@ -15,19 +15,19 @@ function p23_error_response($value, $response_code)
       case 1: $msg = 'Invalid date.'; break;
       case 2: $msg = 'No data found in smoobu api.'; break;
       case 3: $msg = 'No data found in wordpress.'; break;
-      case 4: $msg = 'There are no similarities in values between wordpress and smoobu.'; break;
+      case 4: $msg = '4 There are no similarities in values between wordpress and smoobu.'; break;
       case 5: $msg = 'Smoobu IDs were not found in wordpress.'; break;
       case 6: $msg = 'Invalid guest data.'; break;
       case 7: $msg = 'Invalid guest data, some entry empty values.'; break;
-      case 8: $msg = "There are no similarities in guests values between wordpress query and smoobu."; break;
+      case 8: $msg = "8 There are no similarities in guests values between wordpress query and smoobu."; break;
       case 9: $msg = "Invalid price."; break;
       case 10:$msg = "Empty price values."; break;
       case 11:$msg = "There are no similarities in price values between wordpress query and smoobu."; break;
       case 12:$msg = "Empty services values."; break;
       case 13:$msg = "Empty zones values."; break;
-      case 14:$msg = "There are no similarities in values between wordpress services and parsed data."; break;
-      case 15:$msg = "There are no similarities in values between wordpress zones and parsed data."; break;
-      case 16:$msg = "There are no similarities in values between wordpress and parsed data."; break;
+      case 14:$msg = "14 There are no similarities in values between wordpress services and parsed data."; break;
+      case 15:$msg = "15 There are no similarities in values between wordpress zones and parsed data."; break;
+      case 16:$msg = "16 There are no similarities in values between wordpress and parsed data."; break;
     }
   }
   if($isArray){

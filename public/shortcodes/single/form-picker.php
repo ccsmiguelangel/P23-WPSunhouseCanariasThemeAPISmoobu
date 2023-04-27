@@ -13,7 +13,7 @@ function p23_form_picker_single()
 
 <!--max night range-->
 
-<form id="nd_booking_single_cpt_1_calendar" action="<?php echo $product_url; ?>">
+<form id="nd_booking_single_cpt_1_calendar" action="<?php echo $product_url; ?>" method="post">
   <div
     id="nd_booking_search_main_bg"
     class="nd_booking_section nd_booking_bg_greydark nd_booking_padding_15 nd_booking_padding_0_responsive nd_booking_box_sizing_border_box"

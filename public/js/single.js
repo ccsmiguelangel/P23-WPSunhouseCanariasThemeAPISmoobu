@@ -187,6 +187,7 @@ jQuery(document).ready(function () {
     // break
 
     let booking_submit = document.querySelector("#nd_booking_submit");
+    let p21_submit_booking = document.querySelector('#nd_booking_single_cpt_1_calendar');
     let booking_section = document.querySelector(
       "#nd_booking_single_cpt_1_calendar_btn"
     );
@@ -212,17 +213,19 @@ jQuery(document).ready(function () {
           data: booking_data,
           success: function result(res) {
             booking_id = res.id;
+            p21_submit_booking.action = `${alo_localize_script.woo_url}&booking_id=${booking_id}&price=${response_data.data.price}&cleaning_charge=${response_data.data.clening_charge}`;
           },
           beforeSend: function () {
             document
-              .querySelectorAll(".alocard__list")
-              .forEach((item) => (item.innerHTML = ""));
-
+            .querySelectorAll(".alocard__list")
+            .forEach((item) => (item.innerHTML = ""));
+            
             jQuery("#p23_loader").css("display", "flex");
           },
         })
         .done(() => {
-          window.location.href = `${alo_localize_script.woo_url}&booking_id=${booking_id}&price=${response_data.data.price}&cleaning_charge=${response_data.data.clening_charge}`;
+          // window.location.href = `${alo_localize_script.woo_url}&booking_id=${booking_id}&price=${response_data.data.price}&cleaning_charge=${response_data.data.clening_charge}`;
+          p21_submit_booking.submit();
         });
     });
 
